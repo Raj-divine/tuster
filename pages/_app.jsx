@@ -1,5 +1,4 @@
 import "../styles/globals.css";
-import { useState } from "react";
 import { MantineProvider, ColorSchemeProvider } from "@mantine/core";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 
@@ -30,7 +29,7 @@ function MyApp({ Component, pageProps }) {
         withGlobalStyles
         withNormalizeCSS
       >
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </MantineProvider>
     </ColorSchemeProvider>
   );
