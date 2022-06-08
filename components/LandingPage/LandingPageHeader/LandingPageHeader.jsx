@@ -1,4 +1,5 @@
 import { Space, Text, Button } from "@mantine/core";
+
 const LandingPageHeader = ({ colorScheme }) => {
   return (
     <header className={colorScheme === "dark" ? "dark" : ""}>

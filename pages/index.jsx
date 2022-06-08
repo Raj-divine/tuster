@@ -1,11 +1,14 @@
-import { AppShell } from "@mantine/core";
+import { AppShell, useMantineColorScheme } from "@mantine/core";
 import AppHeader from "../components/AppHeader/AppHeader";
-import { useLocalStorage } from "@mantine/hooks";
+
 import LandingPageHeader from "../components/LandingPage/LandingPageHeader/LandingPageHeader";
 export default function Home() {
-  const [colorScheme] = useLocalStorage({ key: "mantine-color-scheme" });
+  const { colorScheme } = useMantineColorScheme({
+    key: "mantine-color-scheme",
+  });
+
   return (
-    <AppShell header={<AppHeader colorScheme={colorScheme} />}>
+    <AppShell header={<AppHeader />}>
       <LandingPageHeader colorScheme={colorScheme} />
     </AppShell>
   );

@@ -3,8 +3,8 @@ import { BsMoon, BsSunFill, BsGithub } from "react-icons/bs";
 import logo from "../../assets/imgs/logo.svg";
 import Image from "next/image";
 import Link from "next/link";
-const AppHeader = ({ colorScheme }) => {
-  const { toggleColorScheme } = useMantineColorScheme();
+const AppHeader = () => {
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   return (
     <div className={colorScheme === "dark" ? "dark" : ""}>
       <div className="flex items-center px-4 sm:px-8 py-3 justify-between border-b border-b-gray-200 dark:border-b-dark-300">
