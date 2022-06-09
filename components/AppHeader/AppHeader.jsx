@@ -14,7 +14,7 @@ const AppHeader = () => {
       }
     >
       <div className=" flex items-center px-4 sm:px-8 py-3 justify-between border-b border-b-gray-200 dark:border-b-dark-300">
-        <Image src={logo} priority width={40} height={40} />
+        <Image src={logo} priority width={40} height={40} alt="logo" />
         <Link href="/" passHref>
           <Text component="a" className="font-dancingScript text-4xl font-bold">
             Tuster
@@ -22,13 +22,19 @@ const AppHeader = () => {
         </Link>
         <div className="flex">
           <div className=" mr-4">
-            <ActionIcon
-              className="border border-gray-200 dark:border-dark-300"
-              size="lg"
-              variant="light"
+            <a
+              href="https://github.com/Raj-divine/tuster"
+              target="_blank"
+              referrerPolicy="no-referrer"
             >
-              <BsGithub />
-            </ActionIcon>
+              <ActionIcon
+                className="border border-gray-200 dark:border-dark-300"
+                size="lg"
+                variant="light"
+              >
+                <BsGithub />
+              </ActionIcon>
+            </a>
           </div>
           <div>
             <ActionIcon

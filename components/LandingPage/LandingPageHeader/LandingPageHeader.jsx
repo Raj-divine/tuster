@@ -53,6 +53,7 @@ const LandingPageHeader = () => {
             src={headerImage}
             layout="responsive"
             size="50vw"
+            alt="boy sitting on a rock"
           />
         </div>
       </div>

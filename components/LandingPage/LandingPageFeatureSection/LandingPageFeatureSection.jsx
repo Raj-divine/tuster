@@ -11,6 +11,7 @@ const featureData = [
     description:
       "Our learning platform is designed to help you be more confident than ever before. Our Teachers have a unique way of teaching that will help you build confidence.",
     blob: "blob-2",
+    alt: "girl showing graphs",
   },
   {
     image: featureImage2,
@@ -18,13 +19,15 @@ const featureData = [
     description:
       "Our teachers are trained to help you achieve your goals. We will help you achieve your goals.",
     blob: "blob-3",
+    alt: "girl acting as a super hero",
   },
   {
     image: featureImage3,
     heading: "be more observant",
     description:
-      "In this era being a observant and creative person is very important. We will make you a better observant and creative person.",
+      "In this era, being an observant and creative person is very important. We will make you a better observant and creative person.",
     blob: "blob-4",
+    alt: "girl observing something",
   },
 ];
 
@@ -33,7 +36,7 @@ const FeatureSection = () => {
     <section className="px-8 sm:px-24 lg:px-24">
       <Center className="mt-32 text-center">
         <Text
-          className="font-raleway font-medium text-2xl sm:text-3xl tracking-wider border-b-2 pb-2 border-teal-400"
+          className="font-raleway font-medium cursor-default text-2xl sm:text-3xl tracking-wide border-b-2 pb-2 border-teal-400 hover:tracking-wider transition-all duration-300"
           component="h4"
         >
           We will make you fall in love with learning
@@ -50,7 +53,7 @@ const FeatureSection = () => {
           spacing={70}
         >
           {featureData.map((feature, index) => {
-            return <Feature key={index} {...feature} />;
+            return <Feature key={index} blob="blob-3" {...feature} />;
           })}
         </SimpleGrid>
       </Center>
