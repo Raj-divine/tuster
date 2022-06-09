@@ -6,8 +6,14 @@ import Link from "next/link";
 const AppHeader = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   return (
-    <div className={colorScheme === "dark" ? "dark" : ""}>
-      <div className="flex items-center px-4 sm:px-8 py-3 justify-between border-b border-b-gray-200 dark:border-b-dark-300">
+    <div
+      className={
+        colorScheme === "dark"
+          ? "dark sticky top-0 bg-dark-700 "
+          : "sticky top-0 bg-white"
+      }
+    >
+      <div className=" flex items-center px-4 sm:px-8 py-3 justify-between border-b border-b-gray-200 dark:border-b-dark-300">
         <Image src={logo} priority width={40} height={40} />
         <Link href="/" passHref>
           <Text component="a" className="font-dancingScript text-4xl font-bold">

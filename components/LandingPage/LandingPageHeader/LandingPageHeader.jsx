@@ -47,7 +47,7 @@ const LandingPageHeader = ({ colorScheme }) => {
             </Button>
           </div>
         </div>
-        <div className="rounded-blob hidden xl:block w-1/2 2xl:w-2/5 overflow-hidden shadow-lg">
+        <div className="rounded-blob hidden xl:block w-1/2 2xl:w-2/5 overflow-hidden shadow-lg -z-10">
           <Image
             placeholder="blur"
             src={headerImage}
