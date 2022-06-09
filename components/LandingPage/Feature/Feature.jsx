@@ -1,9 +1,12 @@
 import Image from "next/image";
 import { Space, Text } from "@mantine/core";
-const Feature = ({ image, heading, description }) => {
+const Feature = ({ image, heading, description, blob }) => {
   return (
     <div className="flex flex-col items-center ">
-      <div className=" w-52 h-52">
+      <div className="w-52 h-52 relative">
+        <div
+          className={`rounded-${blob} absolute inset-x-0 top-6 bottom-6 -z-10 bg-gradient-to-tr from-teal-200 to-teal-800`}
+        ></div>
         <Image src={image} objectFit="contain" />
       </div>
       <div className="flex flex-col items-center text-center">
@@ -12,7 +15,11 @@ const Feature = ({ image, heading, description }) => {
         </Text>
         <Space h={20} />
 
-        <Text className="text-base w-2/3" color="dimmed" component="p">
+        <Text
+          className="text-base sm:w-3/4 lg:w-2/3"
+          color="dimmed"
+          component="p"
+        >
           {description}
         </Text>
       </div>
