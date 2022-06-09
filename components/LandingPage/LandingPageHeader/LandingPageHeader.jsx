@@ -1,9 +1,9 @@
 import { Space, Text, Button } from "@mantine/core";
 import Image from "next/image";
 import headerImage from "../../../assets/imgs/landingPageHeaderImage.jpg";
-const LandingPageHeader = ({ colorScheme }) => {
+const LandingPageHeader = () => {
   return (
-    <header className={colorScheme === "dark" ? "dark" : ""}>
+    <header>
       <div className="mt-8 xs:mt-12 sm:mt-20 flex justify-between">
         <div className="xl:w-1/2 ">
           <h1 className="uppercase font-bold text-5xl xs:text-7xl sm:text-8xl">
@@ -47,7 +47,7 @@ const LandingPageHeader = ({ colorScheme }) => {
             </Button>
           </div>
         </div>
-        <div className="rounded-blob hidden xl:block w-1/2 2xl:w-2/5 overflow-hidden shadow-lg -z-10">
+        <div className="rounded-blob hidden xl:block w-1/2 2xl:w-2/5 overflow-hidden shadow-lg">
           <Image
             placeholder="blur"
             src={headerImage}

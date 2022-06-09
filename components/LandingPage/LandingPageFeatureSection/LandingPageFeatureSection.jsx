@@ -1,25 +1,49 @@
-import { Text, Center, Box, SimpleGrid } from "@mantine/core";
+import { Text, Center, SimpleGrid, Space } from "@mantine/core";
 import Feature from "../Feature/Feature";
-const FeatureSection = ({ colorScheme }) => {
+import featureImage1 from "../../../assets/imgs/featureImage1.png";
+import featureImage2 from "../../../assets/imgs/featureImage2.png";
+import featureImage3 from "../../../assets/imgs/featureImage3.png";
+
+const featureData = [
+  {
+    image: featureImage1,
+    heading: "Be more confident than ever before",
+    description:
+      "Our learning platform is designed to help you be more confident than ever before. Our Teachers have a unique way of teaching that will help you build confidence.",
+  },
+  {
+    image: featureImage2,
+    heading: "Achieve your goals",
+    description:
+      "Our teachers are trained to help you achieve your goals. We will help you achieve your goals.",
+  },
+  {
+    image: featureImage3,
+    heading: "be more observant",
+    description:
+      "In this era being a observant and creative person is very important. We will make you a better observant and creative person.",
+  },
+];
+
+const FeatureSection = () => {
   return (
-    <section className={colorScheme === "dark" ? "dark" : ""}>
-      <div>
-        <Center className="mt-20">
-          <Text
-            className="font-raleway font-medium text-3xl tracking-wider border-b-2 pb-2 border-teal-400"
-            component="h4"
-          >
-            We will make you fall in love with learning
-          </Text>
-        </Center>
-        <Box>
-          <SimpleGrid cols={3}>
-            <Feature colorScheme={colorScheme} />
-            <Feature colorScheme={colorScheme} />
-            <Feature colorScheme={colorScheme} />
-          </SimpleGrid>
-        </Box>
-      </div>
+    <section className="px-24">
+      <Center className="mt-32">
+        <Text
+          className="font-raleway font-medium text-3xl tracking-wider border-b-2 pb-2 border-teal-400"
+          component="h4"
+        >
+          We will make you fall in love with learning
+        </Text>
+      </Center>
+      <Space h={100} />
+      <Center>
+        <SimpleGrid cols={3} spacing={70}>
+          {featureData.map((feature, index) => {
+            return <Feature key={index} {...feature} />;
+          })}
+        </SimpleGrid>
+      </Center>
     </section>
   );
 };

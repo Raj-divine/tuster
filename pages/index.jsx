@@ -15,8 +15,11 @@ export default function Home() {
         <title>Tuster</title>
       </Head>
       <AppShell header={<AppHeader />}>
-        <LandingPageHeader colorScheme={colorScheme} />
-        <LandingPageFeatureSection colorScheme={colorScheme} />
+        <div className={colorScheme === "dark" ? "dark" : ""}>
+          <LandingPageHeader />
+
+          <LandingPageFeatureSection />
+        </div>
       </AppShell>
     </>
   );

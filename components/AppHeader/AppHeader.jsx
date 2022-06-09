@@ -9,8 +9,8 @@ const AppHeader = () => {
     <div
       className={
         colorScheme === "dark"
-          ? "dark sticky top-0 bg-dark-700 "
-          : "sticky top-0 bg-white"
+          ? "dark sticky top-0 bg-dark-700 z-10"
+          : "sticky top-0 bg-white z-10"
       }
     >
       <div className=" flex items-center px-4 sm:px-8 py-3 justify-between border-b border-b-gray-200 dark:border-b-dark-300">
