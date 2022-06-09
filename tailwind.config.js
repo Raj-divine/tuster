@@ -37,6 +37,9 @@ module.exports = {
           900: "#101113",
         },
       },
+      borderRadius: {
+        blob: "36% 64% 57% 43% / 72% 43% 57% 28% ",
+      },
     },
     screens: {
       xs: "450px",
