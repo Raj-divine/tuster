@@ -10,7 +10,7 @@ const featureData = [
     heading: "Be more confident than ever before",
     description:
       "Our learning platform is designed to help you be more confident than ever before. Our Teachers have a unique way of teaching that will help you build confidence.",
-    blob: "blob-2",
+    blob: "rounded-blob-2",
     alt: "girl showing graphs",
   },
   {
@@ -18,7 +18,7 @@ const featureData = [
     heading: "Achieve your goals",
     description:
       "Our teachers are trained to help you achieve your goals. We will help you achieve your goals.",
-    blob: "blob-3",
+    blob: "rounded-blob-3",
     alt: "girl acting as a super hero",
   },
   {
@@ -26,7 +26,7 @@ const featureData = [
     heading: "be more observant",
     description:
       "In this era, being an observant and creative person is very important. We will make you a better observant and creative person.",
-    blob: "blob-4",
+    blob: "rounded-blob-4",
     alt: "girl observing something",
   },
 ];

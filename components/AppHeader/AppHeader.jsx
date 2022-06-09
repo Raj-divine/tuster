@@ -25,7 +25,7 @@ const AppHeader = () => {
             <a
               href="https://github.com/Raj-divine/tuster"
               target="_blank"
-              referrerPolicy="no-referrer"
+              rel="noreferrer"
             >
               <ActionIcon
                 className="border border-gray-200 dark:border-dark-300"

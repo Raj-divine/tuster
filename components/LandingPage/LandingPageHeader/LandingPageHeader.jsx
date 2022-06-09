@@ -33,7 +33,7 @@ const LandingPageHeader = () => {
               radius="md"
               className="bg-teal-500 hover:bg-teal-600 font-normal text-lg tracking-wider dark:text-teal-100"
             >
-              Let's start
+              Let&apos;s start
             </Button>
             <Space w={20} />
             <Button

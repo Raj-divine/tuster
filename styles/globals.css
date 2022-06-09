@@ -2,3 +2,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .rounded-blob {
+    border-radius: 36% 64% 57% 43% / 72% 43% 57% 28%;
+  }
+  .rounded-blob-2 {
+    border-radius: 54% 46% 61% 39% / 26% 41% 59% 74%;
+  }
+  .rounded-blob-3 {
+    border-radius: 73% 27% 71% 29% / 52% 71% 29% 48%;
+  }
+  .rounded-blob-4 {
+    border-radius: 51% 49% 64% 36% / 31% 33% 67% 69%;
+  }
+}

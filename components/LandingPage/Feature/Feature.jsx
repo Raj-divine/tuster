@@ -5,7 +5,7 @@ const Feature = ({ image, heading, description, blob, alt }) => {
     <div className="flex flex-col items-center ">
       <div className="w-52 h-52 relative ">
         <div
-          className={`absolute rounded-${blob} inset-x-0 top-6 bottom-6 -z-10 bg-gradient-to-tr from-teal-200 to-teal-800`}
+          className={`absolute ${blob} inset-x-0 top-6 bottom-6 -z-10 bg-gradient-to-tr from-teal-200 to-teal-800`}
         ></div>
         <Image
           className="hover:scale-105 transition-transform duration-300"
