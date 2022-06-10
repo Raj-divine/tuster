@@ -4,6 +4,7 @@ import LandingPageHeader from "../components/LandingPage/LandingPageHeader/Landi
 import LandingPageFeatureSection from "../components/LandingPage/LandingPageFeatureSection/LandingPageFeatureSection";
 import LandingPageTestimonialSection from "../components/LandingPage/LandingPageTestimonialSection/LandingPageTestimonialSection";
 import Head from "next/head";
+import LandingPageStatsSection from "../components/LandingPage/LandingPageStatsSection/LandingPageStatsSection";
 
 export default function Home() {
   const { colorScheme } = useMantineColorScheme({
@@ -20,6 +21,7 @@ export default function Home() {
           <LandingPageHeader />
           <LandingPageFeatureSection />
           <LandingPageTestimonialSection />
+          <LandingPageStatsSection />
         </div>
       </AppShell>
     </>

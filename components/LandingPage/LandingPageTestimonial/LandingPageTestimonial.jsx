@@ -9,7 +9,7 @@ const LandingPageTestimonial = ({
   image,
 }) => {
   return (
-    <Card className="shadow-inner p-7 rounded-xl dark:shadow-dark-800 bg-gray-50 dark:bg-dark-600">
+    <Card className="shadow-inner p-7 rounded-xl dark:shadow-dark-800 bg-gray-50 dark:bg-dark-600 hover:-translate-y-3 transition-transform cursor-default duration-300">
       <div className="flex">
         <div className="w-10 h-10">
           <Image

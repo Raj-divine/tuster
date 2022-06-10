@@ -38,7 +38,7 @@ const testimonialData = [
     text: `Quick shoutout to @tuster for saving me a lot of time 
     and money. Finding tutors for a 1 on 1 mentoring session for
      my son was a nightmare for me, Good thing i found out about @tuster `,
-    uploadedOn: "12th feb 2022 on reddit",
+    uploadedOn: "12th feb 2022 on facebook",
     image: avatar4,
   },
   {

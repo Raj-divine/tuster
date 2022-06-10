@@ -34,7 +34,7 @@ const featureData = [
 const FeatureSection = () => {
   return (
     <section className="px-8 sm:px-24 lg:px-24">
-      <Center className="mt-32 text-center">
+      <Center className="mt-32">
         <Text className="section-heading" component="h4">
           We will make you fall in love with learning
         </Text>

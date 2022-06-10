@@ -5,7 +5,7 @@ import Head from "next/head";
 function MyApp({ Component, pageProps }) {
   const [colorScheme, setColorScheme] = useLocalStorage({
     key: "mantine-color-scheme",
-    defaultValue: "light",
+    defaultValue: "dark",
     getInitialValueInEffect: true,
   });
 
