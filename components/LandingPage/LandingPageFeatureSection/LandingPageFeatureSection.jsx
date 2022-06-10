@@ -35,10 +35,7 @@ const FeatureSection = () => {
   return (
     <section className="px-8 sm:px-24 lg:px-24">
       <Center className="mt-32 text-center">
-        <Text
-          className="font-raleway font-medium cursor-default text-2xl sm:text-3xl tracking-wide border-b-2 pb-2 border-teal-400 hover:tracking-wider transition-all duration-300"
-          component="h4"
-        >
+        <Text className="section-heading" component="h4">
           We will make you fall in love with learning
         </Text>
       </Center>

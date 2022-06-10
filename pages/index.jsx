@@ -1,9 +1,10 @@
 import { AppShell, useMantineColorScheme } from "@mantine/core";
 import AppHeader from "../components/AppHeader/AppHeader";
-
 import LandingPageHeader from "../components/LandingPage/LandingPageHeader/LandingPageHeader";
-import Head from "next/head";
 import LandingPageFeatureSection from "../components/LandingPage/LandingPageFeatureSection/LandingPageFeatureSection";
+import LandingPageTestimonialSection from "../components/LandingPage/LandingPageTestimonialSection/LandingPageTestimonialSection";
+import Head from "next/head";
+
 export default function Home() {
   const { colorScheme } = useMantineColorScheme({
     key: "mantine-color-scheme",
@@ -17,8 +18,8 @@ export default function Home() {
       <AppShell header={<AppHeader />}>
         <div className={colorScheme === "dark" ? "dark" : ""}>
           <LandingPageHeader />
-
           <LandingPageFeatureSection />
+          <LandingPageTestimonialSection />
         </div>
       </AppShell>
     </>
