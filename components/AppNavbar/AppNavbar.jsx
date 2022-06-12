@@ -1,12 +1,12 @@
 import { Navbar, Center } from "@mantine/core";
 import { useRouter } from "next/router";
 import { useMantineColorScheme } from "@mantine/core";
+import { useSelector } from "react-redux";
 import Link from "next/link";
 import { AiOutlineHome, AiOutlineContacts } from "react-icons/ai";
 
 const NavLink = ({ children, href, exact, ...props }) => {
   const { pathname } = useRouter();
-  console.log(pathname);
   const isActive = pathname === href;
 
   return (
@@ -27,12 +27,15 @@ const NavLink = ({ children, href, exact, ...props }) => {
 
 const AppNavbar = () => {
   const { colorScheme } = useMantineColorScheme();
+  const { isOpen } = useSelector((state) => state.navbarSlice);
   return (
     <Navbar
       p={15}
       className={colorScheme === "dark" ? "dark" : ""}
       width={{ base: 300 }}
       height="100%"
+      hidden={!isOpen}
+      hiddenBreakpoint="md"
     >
       <Navbar.Section>
         <ul>

@@ -1,10 +1,22 @@
-import { ActionIcon, useMantineColorScheme, Text, Header } from "@mantine/core";
+import {
+  ActionIcon,
+  useMantineColorScheme,
+  Text,
+  Header,
+  MediaQuery,
+  Burger,
+} from "@mantine/core";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleNavbar } from "../../context/navbarSlice";
 import { BsMoon, BsSunFill, BsGithub } from "react-icons/bs";
 import logo from "../../assets/imgs/logo.svg";
 import Image from "next/image";
 import Link from "next/link";
+
 const AppHeader = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const dispatch = useDispatch();
+  const { isOpen } = useSelector((state) => state.navbarSlice);
   return (
     <Header
       className={
@@ -45,6 +57,17 @@ const AppHeader = () => {
             >
               {colorScheme === "dark" ? <BsSunFill /> : <BsMoon />}
             </ActionIcon>
+          </div>
+          <div>
+            <MediaQuery largerThan="md" styles={{ display: "none" }}>
+              <Burger
+                opened={isOpen}
+                onClick={() => dispatch(toggleNavbar())}
+                size="md"
+                color="#868E96"
+                ml="sm"
+              />
+            </MediaQuery>
           </div>
         </div>
       </div>

@@ -10,8 +10,15 @@ const Home = () => {
       <Head>
         <title>Tuster | Home</title>
       </Head>
-      <AppShell fixed header={<AppHeader />} navbar={<AppNavbar />}>
-        <div className={colorScheme === "dark" ? "dark" : ""}></div>
+      <AppShell
+        navbarOffsetBreakpoint="md"
+        fixed
+        header={<AppHeader />}
+        navbar={<AppNavbar />}
+      >
+        <div className={colorScheme === "dark" ? "dark" : ""}>
+          <div>this is a really really long</div>
+        </div>
       </AppShell>
     </>
   );
