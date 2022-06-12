@@ -1,12 +1,11 @@
-import { AppShell, useMantineColorScheme } from "@mantine/core";
+import { AppShell, Footer, useMantineColorScheme } from "@mantine/core";
 import AppHeader from "../components/AppHeader/AppHeader";
 import LandingPageHeader from "../components/LandingPage/LandingPageHeader/LandingPageHeader";
 import LandingPageFeatureSection from "../components/LandingPage/LandingPageFeatureSection/LandingPageFeatureSection";
 import LandingPageTestimonialSection from "../components/LandingPage/LandingPageTestimonialSection/LandingPageTestimonialSection";
 import Head from "next/head";
 import LandingPageStatsSection from "../components/LandingPage/LandingPageStatsSection/LandingPageStatsSection";
-
-export default function Home() {
+export default function LandingPage() {
   const { colorScheme } = useMantineColorScheme({
     key: "mantine-color-scheme",
   });

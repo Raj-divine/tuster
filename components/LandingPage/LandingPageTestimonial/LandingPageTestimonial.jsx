@@ -1,6 +1,5 @@
 import { Card, Text, Highlight } from "@mantine/core";
 import Image from "next/image";
-import avatar1 from "../../../assets/imgs/testimonila-avatar-1.jpg";
 const LandingPageTestimonial = ({
   name,
   username,
@@ -17,6 +16,7 @@ const LandingPageTestimonial = ({
             src={image}
             layout="responsive"
             sizes="10vw"
+            alt={name}
           />
         </div>
         <div className="ml-4">

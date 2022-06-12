@@ -7,4 +7,8 @@
   .section-heading {
     @apply font-raleway font-medium cursor-default text-2xl sm:text-3xl tracking-wide border-b-2 pb-2 border-teal-400 hover:tracking-wider transition-all duration-300 text-center;
   }
+
+  .active {
+    @apply bg-teal-100 dark:bg-dark-400 text-teal-500;
+  }
 }
