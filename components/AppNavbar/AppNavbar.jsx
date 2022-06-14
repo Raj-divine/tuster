@@ -32,9 +32,9 @@ const AppNavbar = () => {
     <Navbar
       p={15}
       className={colorScheme === "dark" ? "dark" : ""}
-      width={{ base: 300 }}
-      height="100%"
+      width={{ base: 250 }}
       hidden={!isOpen}
+      height="100%"
       hiddenBreakpoint="md"
     >
       <Navbar.Section>

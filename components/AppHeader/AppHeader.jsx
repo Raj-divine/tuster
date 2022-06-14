@@ -66,6 +66,7 @@ const AppHeader = () => {
                 size="md"
                 color="#868E96"
                 ml="sm"
+                mr={-5}
               />
             </MediaQuery>
           </div>
