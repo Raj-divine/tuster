@@ -13,7 +13,7 @@ import logo from "../../assets/imgs/logo.svg";
 import Image from "next/image";
 import Link from "next/link";
 
-const AppHeader = () => {
+const AppHeader = ({ hidden }) => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dispatch = useDispatch();
   const { isOpen } = useSelector((state) => state.navbarSlice);
@@ -58,7 +58,7 @@ const AppHeader = () => {
               {colorScheme === "dark" ? <BsSunFill /> : <BsMoon />}
             </ActionIcon>
           </div>
-          <div>
+          <div className={hidden ? "hidden" : ""}>
             <MediaQuery largerThan="md" styles={{ display: "none" }}>
               <Burger
                 opened={isOpen}

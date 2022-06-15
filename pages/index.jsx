@@ -15,7 +15,7 @@ export default function LandingPage() {
       <Head>
         <title>Tuster</title>
       </Head>
-      <AppShell header={<AppHeader />}>
+      <AppShell header={<AppHeader hidden />}>
         <div className={colorScheme === "dark" ? "dark" : ""}>
           <LandingPageHeader />
           <LandingPageFeatureSection />
