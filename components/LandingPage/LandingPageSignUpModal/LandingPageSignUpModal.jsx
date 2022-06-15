@@ -1,11 +1,19 @@
-import { Modal, Button, Text, Stepper } from "@mantine/core";
+import {
+  Modal,
+  Button,
+  Text,
+  Stepper,
+  TextInput,
+  PasswordInput,
+} from "@mantine/core";
 import { useEffect, useState } from "react";
 import LandingPageSignUpModalSectionOne from "./LandingPageSignUpModalSectionOne/LandingPageSignUpModalSectionOne";
 import LandingPageSignUpModalSectionTwo from "./LandingPageSignUpModalSectionTwo/LandingPageSignUpModalSectionTwo";
 
 const LandingPageSignUpModal = ({ opened, onClose }) => {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
   const [subjects, setSubjects] = useState([]);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const initialErrorState = {
     firstName: "",
@@ -18,9 +26,7 @@ const LandingPageSignUpModal = ({ opened, onClose }) => {
     subjects: "",
   };
 
-  const [errors, setErrors] = useState(initialErrorState);
-
-  const [formData, setFormData] = useState({
+  const initialFormState = {
     firstName: "",
     lastName: "",
     email: "",
@@ -28,11 +34,15 @@ const LandingPageSignUpModal = ({ opened, onClose }) => {
     confirmPassword: "",
     phone: "",
     address: "",
-  });
+  };
+
+  const [errors, setErrors] = useState(initialErrorState);
+
+  const [formData, setFormData] = useState(initialFormState);
 
   const nextStep = () => {
     //checking validation
-    if (active === 0) {
+    if (active === 0 && !isLoggingIn) {
       if (formData.firstName.trim() === "")
         setErrors({ firstName: "First name is required" });
       else if (formData.firstName.trim().length < 3)
@@ -69,10 +79,10 @@ const LandingPageSignUpModal = ({ opened, onClose }) => {
         setErrors({ confirmPassword: "Passwords must match" });
       else {
         setErrors(initialErrorState);
-        setActive((current) => (current < 2 ? current + 1 : current));
+        setActive((current) => (current < 1 ? current + 1 : current));
       }
     }
-    if (active === 1) {
+    if (active === 1 && !isLoggingIn) {
       if (formData.subjects.length < 3)
         setErrors({ subjects: "Please select at least 3 subject" });
       else if (formData.address.trim() === "")
@@ -85,8 +95,33 @@ const LandingPageSignUpModal = ({ opened, onClose }) => {
         setErrors({ phone: "Please enter a valid phone number" });
       else {
         setErrors(initialErrorState);
-        setActive((current) => (current < 2 ? current + 1 : current));
+        setActive((current) => (current < 1 ? current + 1 : current));
       }
+    }
+    if (isLoggingIn) {
+      if (formData.email.trim() === "")
+        setErrors({ email: "Email is required" });
+      else if (!formData.email.includes("@") || !formData.email.includes("."))
+        setErrors({ email: "Please enter a valid email" });
+      else if (formData.password.trim() === "")
+        setErrors({ password: "Password is required" });
+      else if (formData.password.trim().length < 6)
+        setErrors({ password: "Password must be at least 6 characters" });
+      else if (!formData.password.match(/[a-z]+/))
+        setErrors({
+          password: "Password must contain at least one lowercase letter",
+        });
+      else if (!formData.password.match(/[0-9]+/))
+        setErrors({ password: "Password must contain at least one number" });
+      else if (!formData.password.match(/[A-Z]+/))
+        setErrors({
+          password: "Password must contain at least one uppercase letter",
+        });
+      else if (!formData.password.match(/[$@#&!%^&*()]+/))
+        setErrors({
+          password: "Password must contain at least one special character",
+        });
+      else setErrors(initialErrorState);
     }
   };
   const prevStep = () =>
@@ -104,13 +139,18 @@ const LandingPageSignUpModal = ({ opened, onClose }) => {
           `api/get-user-location?q=${latitude}+${longitude}`
         );
         const data = await response.json();
-        console.log(data);
         setFormData((prev) => ({
           ...prev,
           address: data.results[0].formatted,
         }));
       });
     }
+  };
+
+  const loginToggleHandler = () => {
+    setIsLoggingIn((prev) => !prev);
+    setFormData(initialFormState);
+    setErrors(initialErrorState);
   };
 
   return (
@@ -121,53 +161,105 @@ const LandingPageSignUpModal = ({ opened, onClose }) => {
       }}
       opened={opened}
       onClose={onClose}
-      title="Exited to start a journey with you!"
+      title={
+        isLoggingIn
+          ? "Exited to see you again!"
+          : "Exited to start a journey with you!"
+      }
       size="md"
     >
-      <form onSubmit={(e) => e.preventDefault()}>
-        <Stepper
-          size="sm"
-          color="teal"
-          active={active}
-          onStepClick={setActive}
-          breakpoint="sm"
-        >
-          {/* Step 1 */}
-          <Stepper.Step
-            allowStepSelect={false}
-            label="Create account"
-            description="let's take the first step"
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (
+            !errors.firstName &&
+            !errors.lastName &&
+            !errors.email &&
+            !errors.password &&
+            !errors.confirmPassword &&
+            !errors.subjects &&
+            !errors.address &&
+            !errors.phone
+          ) {
+            console.log("subbed");
+          }
+        }}
+      >
+        {!isLoggingIn && (
+          <Stepper
+            size="sm"
+            color="teal"
+            active={active}
+            onStepClick={setActive}
+            breakpoint="sm"
           >
-            <LandingPageSignUpModalSectionOne
-              setFormData={setFormData}
-              formData={formData}
-              errors={errors}
-            />
-          </Stepper.Step>
-          {/* Step 2 */}
-          <Stepper.Step
-            allowStepSelect={false}
-            label="Additional Information"
-            description="Tell us more about you"
-          >
-            <LandingPageSignUpModalSectionTwo
-              subjects={subjects}
-              setSubjects={setSubjects}
-              formData={formData}
-              setFormData={setFormData}
-              errors={errors}
-              addressFocusHandler={addressFocusHandler}
-            />
-          </Stepper.Step>
-          <Stepper.Completed>
-            Completed, click back button to get to previous step
-          </Stepper.Completed>
-        </Stepper>
+            {/* Step 1 */}
+            <Stepper.Step
+              allowStepSelect={false}
+              label="Create account"
+              description="let's take the first step"
+            >
+              <LandingPageSignUpModalSectionOne
+                setFormData={setFormData}
+                formData={formData}
+                errors={errors}
+              />
+            </Stepper.Step>
+            {/* Step 2 */}
+            <Stepper.Step
+              allowStepSelect={false}
+              label="Additional Information"
+              description="Tell us more about you"
+            >
+              <LandingPageSignUpModalSectionTwo
+                subjects={subjects}
+                setSubjects={setSubjects}
+                formData={formData}
+                setFormData={setFormData}
+                errors={errors}
+                addressFocusHandler={addressFocusHandler}
+              />
+            </Stepper.Step>
+          </Stepper>
+        )}
+        {isLoggingIn && (
+          <>
+            <div className="mt-3">
+              <TextInput
+                placeholder="example@example.com"
+                label="email"
+                required
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, email: e.target.value }))
+                }
+                error={errors.email}
+              />
+            </div>
+            <div className="mt-3">
+              <PasswordInput
+                placeholder="Password"
+                label="Password"
+                required
+                value={formData.password}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, password: e.target.value }))
+                }
+                error={errors.password}
+              />
+            </div>
+          </>
+        )}
 
         <div className="mt-5 flex justify-between items-center">
           {active < 1 && (
-            <Text className="hover:underline underline-offset-1 cursor-pointer">
-              have an account? Login
+            <Text
+              onClick={loginToggleHandler}
+              className="hover:underline underline-offset-1 cursor-pointer"
+            >
+              {!isLoggingIn
+                ? "have an account? Login"
+                : "don't have an account? Sign up"}
             </Text>
           )}
 
@@ -182,10 +274,10 @@ const LandingPageSignUpModal = ({ opened, onClose }) => {
           )}
           <Button
             onClick={nextStep}
-            type={active === 2 ? "submit" : "button"}
+            type={active === 1 || isLoggingIn ? "submit" : "button"}
             className="bg-teal-500 hover:bg-teal-600 font-light text-lg tracking-wider dark:text-teal-100"
           >
-            {active === 2 ? "Register" : "Next"}
+            {active === 1 ? "Register" : isLoggingIn ? "Login" : "Next"}
           </Button>
         </div>
       </form>
