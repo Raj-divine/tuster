@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import LandingPageSignUpModalSectionOne from "./LandingPageSignUpModalSectionOne/LandingPageSignUpModalSectionOne";
 import LandingPageSignUpModalSectionTwo from "./LandingPageSignUpModalSectionTwo/LandingPageSignUpModalSectionTwo";
 
-const LandingPageSignUpModal = ({ opened, onClose }) => {
+const LandingPageSignUpModal = ({ opened, closeModal }) => {
   const [active, setActive] = useState(0);
   const [subjects, setSubjects] = useState([]);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
@@ -98,6 +98,7 @@ const LandingPageSignUpModal = ({ opened, onClose }) => {
         setActive((current) => (current < 1 ? current + 1 : current));
       }
     }
+    //checking validation when logging in
     if (isLoggingIn) {
       if (formData.email.trim() === "")
         setErrors({ email: "Email is required" });
@@ -160,7 +161,7 @@ const LandingPageSignUpModal = ({ opened, onClose }) => {
         title: "text-xl font-semibold",
       }}
       opened={opened}
-      onClose={onClose}
+      onClose={closeModal}
       title={
         isLoggingIn
           ? "Exited to see you again!"
@@ -182,6 +183,10 @@ const LandingPageSignUpModal = ({ opened, onClose }) => {
             !errors.phone
           ) {
             console.log("subbed");
+            setFormData(initialFormState);
+            setErrors(initialErrorState);
+            setIsLoggingIn(false);
+            closeModal();
           }
         }}
       >

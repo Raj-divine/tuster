@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import headerImage from "../../../assets/imgs/landingPageHeaderImage.jpg";
 const LandingPageHeader = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <header>
       <div className="mt-8 xs:mt-12 sm:mt-20 flex justify-between">
@@ -35,7 +35,7 @@ const LandingPageHeader = () => {
               size="md"
               radius="md"
               className="bg-teal-500 hover:bg-teal-600 font-normal text-lg tracking-wider dark:text-teal-100"
-              onClick={() => setIsOpen(true)}
+              onClick={() => setIsModalOpen(true)}
             >
               Let&apos;s start
             </Button>
@@ -62,8 +62,8 @@ const LandingPageHeader = () => {
         </div>
       </div>
       <LandingPageSignUpModal
-        onClose={() => setIsOpen(false)}
-        opened={isOpen}
+        closeModal={() => setIsModalOpen(false)}
+        opened={isModalOpen}
       />
     </header>
   );
