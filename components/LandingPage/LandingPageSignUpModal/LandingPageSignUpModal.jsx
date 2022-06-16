@@ -6,6 +6,7 @@ import {
   TextInput,
   PasswordInput,
 } from "@mantine/core";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import LandingPageSignUpModalSectionOne from "./LandingPageSignUpModalSectionOne/LandingPageSignUpModalSectionOne";
 import LandingPageSignUpModalSectionTwo from "./LandingPageSignUpModalSectionTwo/LandingPageSignUpModalSectionTwo";
@@ -20,6 +21,8 @@ const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
   const [active, setActive] = useState(0);
   const [subjects, setSubjects] = useState([]);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     setIsLoggingIn(openWithLogin);
@@ -209,6 +212,7 @@ const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
         setErrors(initialErrorState);
         setIsLoggingIn(false);
         closeModal();
+        router.replace("/home");
       }
     } catch (error) {
       console.log(error);
@@ -301,7 +305,7 @@ const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
           {active < 1 && (
             <Text
               onClick={loginToggleHandler}
-              className="hover:underline underline-offset-1 cursor-pointer"
+              className="hover:underline underline-offset-1 sm:text-base cursor-pointer text-xs w-1/2"
             >
               {!isLoggingIn
                 ? "have an account? Login"

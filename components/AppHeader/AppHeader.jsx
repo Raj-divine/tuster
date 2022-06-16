@@ -39,10 +39,12 @@ const AppHeader = ({ hiddenBurger }) => {
               target="_blank"
               rel="noreferrer"
             >
+              &nbsp;
               <ActionIcon
                 className="border border-gray-200 dark:border-dark-300"
                 size="lg"
                 variant="light"
+                aria-label="Github"
               >
                 <BsGithub />
               </ActionIcon>
@@ -54,6 +56,7 @@ const AppHeader = ({ hiddenBurger }) => {
               variant="light"
               className="border border-gray-200 dark:border-dark-300"
               onClick={() => toggleColorScheme()}
+              aria-label="Toggle color scheme"
             >
               {colorScheme === "dark" ? <BsSunFill /> : <BsMoon />}
             </ActionIcon>
