@@ -9,11 +9,21 @@ import {
 import { useEffect, useState } from "react";
 import LandingPageSignUpModalSectionOne from "./LandingPageSignUpModalSectionOne/LandingPageSignUpModalSectionOne";
 import LandingPageSignUpModalSectionTwo from "./LandingPageSignUpModalSectionTwo/LandingPageSignUpModalSectionTwo";
-
-const LandingPageSignUpModal = ({ opened, closeModal }) => {
+import { app, db } from "../../../firebase/firebaseConfig";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
   const [active, setActive] = useState(0);
   const [subjects, setSubjects] = useState([]);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
+
+  useEffect(() => {
+    setIsLoggingIn(openWithLogin);
+  }, [openWithLogin]);
 
   const initialErrorState = {
     firstName: "",
@@ -154,6 +164,57 @@ const LandingPageSignUpModal = ({ opened, closeModal }) => {
     setErrors(initialErrorState);
   };
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      if (
+        !errors.firstName &&
+        !errors.lastName &&
+        !errors.email &&
+        !errors.password &&
+        !errors.confirmPassword &&
+        !errors.subjects &&
+        !errors.address &&
+        !errors.phone
+      ) {
+        const auth = getAuth();
+        if (!isLoggingIn) {
+          const userCredential = await createUserWithEmailAndPassword(
+            auth,
+            formData.email,
+            formData.password
+          );
+          const user = userCredential.user;
+
+          await setDoc(doc(db, "users", user.uid), {
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            hashedPassword: user.reloadUserInfo.passwordHash,
+            subjects: formData.subjects,
+            address: formData.address,
+            phone: formData.phone,
+          });
+        }
+        if (isLoggingIn) {
+          const userCredential = await signInWithEmailAndPassword(
+            auth,
+            formData.email,
+            formData.password
+          );
+          const user = userCredential.user;
+        }
+
+        setFormData(initialFormState);
+        setErrors(initialErrorState);
+        setIsLoggingIn(false);
+        closeModal();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Modal
       classNames={{
@@ -169,27 +230,7 @@ const LandingPageSignUpModal = ({ opened, closeModal }) => {
       }
       size="md"
     >
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          if (
-            !errors.firstName &&
-            !errors.lastName &&
-            !errors.email &&
-            !errors.password &&
-            !errors.confirmPassword &&
-            !errors.subjects &&
-            !errors.address &&
-            !errors.phone
-          ) {
-            console.log("subbed");
-            setFormData(initialFormState);
-            setErrors(initialErrorState);
-            setIsLoggingIn(false);
-            closeModal();
-          }
-        }}
-      >
+      <form onSubmit={submitHandler}>
         {!isLoggingIn && (
           <Stepper
             size="sm"

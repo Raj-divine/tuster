@@ -5,6 +5,7 @@ import Image from "next/image";
 import headerImage from "../../../assets/imgs/landingPageHeaderImage.jpg";
 const LandingPageHeader = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openWithLogin, setOpenWithLogin] = useState(false);
   return (
     <header>
       <div className="mt-8 xs:mt-12 sm:mt-20 flex justify-between">
@@ -35,7 +36,10 @@ const LandingPageHeader = () => {
               size="md"
               radius="md"
               className="bg-teal-500 hover:bg-teal-600 font-normal text-lg tracking-wider dark:text-teal-100"
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => {
+                setIsModalOpen(true);
+                setOpenWithLogin(false);
+              }}
             >
               Let&apos;s start
             </Button>
@@ -46,6 +50,10 @@ const LandingPageHeader = () => {
               color="teal"
               variant="outline"
               className="text-teal-500 border-teal-500  text-lg tracking-wider font-normal"
+              onClick={() => {
+                setOpenWithLogin(true);
+                setIsModalOpen(true);
+              }}
             >
               Login?
             </Button>
@@ -64,6 +72,7 @@ const LandingPageHeader = () => {
       <LandingPageSignUpModal
         closeModal={() => setIsModalOpen(false)}
         opened={isModalOpen}
+        openWithLogin={openWithLogin}
       />
     </header>
   );
