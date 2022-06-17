@@ -39,7 +39,6 @@ const AppHeader = ({ hiddenBurger }) => {
               target="_blank"
               rel="noreferrer"
             >
-              &nbsp;
               <ActionIcon
                 className="border border-gray-200 dark:border-dark-300"
                 size="lg"

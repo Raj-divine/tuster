@@ -21,6 +21,7 @@ const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
   const [active, setActive] = useState(0);
   const [subjects, setSubjects] = useState([]);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [coords, setCoords] = useState({});
 
   const router = useRouter();
 
@@ -148,7 +149,9 @@ const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
   const addressFocusHandler = () => {
     if (window.navigator.geolocation) {
       window.navigator.geolocation.getCurrentPosition(async (location) => {
-        const { latitude, longitude } = location.coords;
+        setCoords(location.coords);
+        const { latitude, longitude } = coords;
+
         const response = await fetch(
           `api/get-user-location?q=${latitude}+${longitude}`
         );
@@ -197,6 +200,10 @@ const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
             subjects: formData.subjects,
             address: formData.address,
             phone: formData.phone,
+            coords: {
+              latitude: coords.latitude,
+              longitude: coords.longitude,
+            },
           });
         }
         if (isLoggingIn) {
@@ -215,7 +222,22 @@ const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
         router.replace("/home");
       }
     } catch (error) {
-      console.log(error);
+      if (
+        error.code === "auth/user-not-found" ||
+        error.code === "auth/wrong-password"
+      ) {
+        setErrors({
+          email: "Wrong Email or Password",
+          password: "Wrong Email or Password",
+        });
+      }
+      if (error.code === "auth/email-already-in-use") {
+        setErrors({
+          email: "Email already in use",
+        });
+        setActive(0);
+      }
+      console.log(error.code);
     }
   };
 
