@@ -16,7 +16,7 @@ import Link from "next/link";
 const AppHeader = ({ hiddenBurger }) => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dispatch = useDispatch();
-  const { isOpen } = useSelector((state) => state.navbarSlice);
+  const { isOpen } = useSelector((state) => state.navbar);
   return (
     <Header
       className={

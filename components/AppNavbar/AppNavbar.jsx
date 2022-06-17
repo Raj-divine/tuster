@@ -14,7 +14,7 @@ const NavLink = ({ children, href, exact, ...props }) => {
       <a
         className={`${
           isActive && "active"
-        } flex items-center w-full py-3 mb-2 rounded-lg px-3 font-semibold ${
+        } flex items-center w-full py-2 mb-1 rounded-lg px-3 font-semibold ${
           !isActive && "text-slate-500"
         } hover:bg-teal-50 hover:text-teal-500 transition-colors dark:text-dark-100 dark:hover:bg-dark-500`}
         {...props}
@@ -27,7 +27,7 @@ const NavLink = ({ children, href, exact, ...props }) => {
 
 const AppNavbar = () => {
   const { colorScheme } = useMantineColorScheme();
-  const { isOpen } = useSelector((state) => state.navbarSlice);
+  const { isOpen } = useSelector((state) => state.navbar);
   return (
     <Navbar
       p={15}

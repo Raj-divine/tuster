@@ -2,8 +2,18 @@ import { AppShell, useMantineColorScheme } from "@mantine/core";
 import Head from "next/head";
 import AppHeader from "../components/AppHeader/AppHeader";
 import AppNavbar from "../components/AppNavbar/AppNavbar";
+import { app } from "../firebase/firebaseConfig";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useRouter } from "next/router";
 const Home = () => {
   const { colorScheme } = useMantineColorScheme();
+  const router = useRouter();
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      router.replace("/");
+    }
+  });
   return (
     <>
       <Head>

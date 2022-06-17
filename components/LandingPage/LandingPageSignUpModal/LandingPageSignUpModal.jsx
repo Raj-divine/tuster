@@ -17,12 +17,12 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+
 const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
   const [active, setActive] = useState(0);
   const [subjects, setSubjects] = useState([]);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [coords, setCoords] = useState({});
-
   const router = useRouter();
 
   useEffect(() => {
