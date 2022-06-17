@@ -1,22 +1,17 @@
-import {
-  Modal,
-  Button,
-  Text,
-  Stepper,
-  TextInput,
-  PasswordInput,
-} from "@mantine/core";
+//utils
+import nextStep from "./utils/nextStep";
+import submitHandler from "./utils/submitHandler";
+import addressFocusHandler from "./utils/addressFocusHandler";
+
+import { Modal, Button, Text, Stepper } from "@mantine/core";
+
 import { useRouter } from "next/router";
+
 import { useEffect, useState } from "react";
+
 import LandingPageSignUpModalSectionOne from "./LandingPageSignUpModalSectionOne/LandingPageSignUpModalSectionOne";
 import LandingPageSignUpModalSectionTwo from "./LandingPageSignUpModalSectionTwo/LandingPageSignUpModalSectionTwo";
-import { app, db } from "../../../firebase/firebaseConfig";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import LandingPageLoginModal from "./LandingPageLoginModal/LandingPageLoginModal";
 
 const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
   const [active, setActive] = useState(0);
@@ -54,91 +49,6 @@ const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
 
   const [formData, setFormData] = useState(initialFormState);
 
-  const nextStep = () => {
-    //checking validation
-    if (active === 0 && !isLoggingIn) {
-      if (formData.firstName.trim() === "")
-        setErrors({ firstName: "First name is required" });
-      else if (formData.firstName.trim().length < 3)
-        setErrors({ firstName: "First name must be at least 3 characters" });
-      else if (formData.lastName.trim() === "")
-        setErrors({ lastName: "Last name is required" });
-      else if (formData.lastName.trim().length < 3)
-        setErrors({ lastName: "Last name must be at least 3 characters" });
-      else if (formData.email.trim() === "")
-        setErrors({ email: "Email is required" });
-      else if (!formData.email.includes("@") || !formData.email.includes("."))
-        setErrors({ email: "Please enter a valid email" });
-      else if (formData.password.trim() === "")
-        setErrors({ password: "Password is required" });
-      else if (formData.password.trim().length < 6)
-        setErrors({ password: "Password must be at least 6 characters" });
-      else if (!formData.password.match(/[a-z]+/))
-        setErrors({
-          password: "Password must contain at least one lowercase letter",
-        });
-      else if (!formData.password.match(/[0-9]+/))
-        setErrors({ password: "Password must contain at least one number" });
-      else if (!formData.password.match(/[A-Z]+/))
-        setErrors({
-          password: "Password must contain at least one uppercase letter",
-        });
-      else if (!formData.password.match(/[$@#&!%^&*()]+/))
-        setErrors({
-          password: "Password must contain at least one special character",
-        });
-      else if (formData.confirmPassword.trim() === "")
-        setErrors({ confirmPassword: "Confirm password is required" });
-      else if (formData.confirmPassword !== formData.password)
-        setErrors({ confirmPassword: "Passwords must match" });
-      else {
-        setErrors(initialErrorState);
-        setActive((current) => (current < 1 ? current + 1 : current));
-      }
-    }
-    if (active === 1 && !isLoggingIn) {
-      if (formData.subjects.length < 3)
-        setErrors({ subjects: "Please select at least 3 subject" });
-      else if (formData.address.trim() === "")
-        setErrors({ address: "Please enter your address" });
-      else if (formData.phone === undefined)
-        setErrors({ phone: "Please enter your phone number" });
-      else if (formData.phone.toString().length < 10)
-        setErrors({ phone: "Please enter a valid phone number" });
-      else if (formData.phone.toString().length > 10)
-        setErrors({ phone: "Please enter a valid phone number" });
-      else {
-        setErrors(initialErrorState);
-        setActive((current) => (current < 1 ? current + 1 : current));
-      }
-    }
-    //checking validation when logging in
-    if (isLoggingIn) {
-      if (formData.email.trim() === "")
-        setErrors({ email: "Email is required" });
-      else if (!formData.email.includes("@") || !formData.email.includes("."))
-        setErrors({ email: "Please enter a valid email" });
-      else if (formData.password.trim() === "")
-        setErrors({ password: "Password is required" });
-      else if (formData.password.trim().length < 6)
-        setErrors({ password: "Password must be at least 6 characters" });
-      else if (!formData.password.match(/[a-z]+/))
-        setErrors({
-          password: "Password must contain at least one lowercase letter",
-        });
-      else if (!formData.password.match(/[0-9]+/))
-        setErrors({ password: "Password must contain at least one number" });
-      else if (!formData.password.match(/[A-Z]+/))
-        setErrors({
-          password: "Password must contain at least one uppercase letter",
-        });
-      else if (!formData.password.match(/[$@#&!%^&*()]+/))
-        setErrors({
-          password: "Password must contain at least one special character",
-        });
-      else setErrors(initialErrorState);
-    }
-  };
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
 
@@ -146,99 +56,10 @@ const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
     setFormData((prev) => ({ ...prev, subjects }));
   }, [subjects]);
 
-  const addressFocusHandler = () => {
-    if (window.navigator.geolocation) {
-      window.navigator.geolocation.getCurrentPosition(async (location) => {
-        setCoords(location.coords);
-        const { latitude, longitude } = coords;
-
-        const response = await fetch(
-          `api/get-user-location?q=${latitude}+${longitude}`
-        );
-        const data = await response.json();
-        setFormData((prev) => ({
-          ...prev,
-          address: data.results[0].formatted,
-        }));
-      });
-    }
-  };
-
   const loginToggleHandler = () => {
     setIsLoggingIn((prev) => !prev);
     setFormData(initialFormState);
     setErrors(initialErrorState);
-  };
-
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    try {
-      if (
-        !errors.firstName &&
-        !errors.lastName &&
-        !errors.email &&
-        !errors.password &&
-        !errors.confirmPassword &&
-        !errors.subjects &&
-        !errors.address &&
-        !errors.phone
-      ) {
-        const auth = getAuth();
-        if (!isLoggingIn) {
-          const userCredential = await createUserWithEmailAndPassword(
-            auth,
-            formData.email,
-            formData.password
-          );
-          const user = userCredential.user;
-
-          await setDoc(doc(db, "users", user.uid), {
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            email: formData.email,
-            hashedPassword: user.reloadUserInfo.passwordHash,
-            subjects: formData.subjects,
-            address: formData.address,
-            phone: formData.phone,
-            coords: {
-              latitude: coords.latitude,
-              longitude: coords.longitude,
-            },
-          });
-        }
-        if (isLoggingIn) {
-          const userCredential = await signInWithEmailAndPassword(
-            auth,
-            formData.email,
-            formData.password
-          );
-          const user = userCredential.user;
-        }
-
-        setFormData(initialFormState);
-        setErrors(initialErrorState);
-        setIsLoggingIn(false);
-        closeModal();
-        router.replace("/home");
-      }
-    } catch (error) {
-      if (
-        error.code === "auth/user-not-found" ||
-        error.code === "auth/wrong-password"
-      ) {
-        setErrors({
-          email: "Wrong Email or Password",
-          password: "Wrong Email or Password",
-        });
-      }
-      if (error.code === "auth/email-already-in-use") {
-        setErrors({
-          email: "Email already in use",
-        });
-        setActive(0);
-      }
-      console.log(error.code);
-    }
   };
 
   return (
@@ -256,7 +77,22 @@ const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
       }
       size="md"
     >
-      <form onSubmit={submitHandler}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          submitHandler({
+            errors,
+            router,
+            formData,
+            coords,
+            isLoggingIn,
+            setFormData,
+            setErrors,
+            setIsLoggingIn,
+            closeModal,
+          });
+        }}
+      >
         {!isLoggingIn && (
           <Stepper
             size="sm"
@@ -289,38 +125,21 @@ const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
                 formData={formData}
                 setFormData={setFormData}
                 errors={errors}
-                addressFocusHandler={addressFocusHandler}
+                addressFocusHandler={addressFocusHandler.bind(
+                  this,
+                  setCoords,
+                  setFormData
+                )}
               />
             </Stepper.Step>
           </Stepper>
         )}
         {isLoggingIn && (
-          <>
-            <div className="mt-3">
-              <TextInput
-                placeholder="example@example.com"
-                label="email"
-                required
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, email: e.target.value }))
-                }
-                error={errors.email}
-              />
-            </div>
-            <div className="mt-3">
-              <PasswordInput
-                placeholder="Password"
-                label="Password"
-                required
-                value={formData.password}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, password: e.target.value }))
-                }
-                error={errors.password}
-              />
-            </div>
-          </>
+          <LandingPageLoginModal
+            formData={formData}
+            setFormData={setFormData}
+            errors={errors}
+          />
         )}
 
         <div className="mt-5 flex justify-between items-center">
@@ -345,7 +164,14 @@ const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
             </Button>
           )}
           <Button
-            onClick={nextStep}
+            onClick={nextStep.bind(this, {
+              setErrors,
+              formData,
+              active,
+              isLoggingIn,
+              setActive,
+              initialErrorState,
+            })}
             type={active === 1 || isLoggingIn ? "submit" : "button"}
             className="bg-teal-500 hover:bg-teal-600 font-light text-lg tracking-wider dark:text-teal-100"
           >
