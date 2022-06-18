@@ -1,4 +1,5 @@
 import { app, db } from "../../../../firebase/firebaseConfig";
+import { showNotification } from "@mantine/notifications";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -50,6 +51,12 @@ const submitHandler = async ({
             longitude: coords.longitude,
           },
         });
+        showNotification({
+          title: "Sign Up Successful",
+          message: "You have successfully signed up!",
+          autoClose: 2000,
+          color: "teal",
+        });
       }
       if (isLoggingIn) {
         await signInWithEmailAndPassword(
@@ -57,6 +64,12 @@ const submitHandler = async ({
           formData.email,
           formData.password
         );
+        showNotification({
+          title: "Sign In Successful",
+          message: "happy to see you again!",
+          autoClose: 2000,
+          color: "teal",
+        });
       }
 
       setFormData(initialFormState);
