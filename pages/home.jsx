@@ -5,6 +5,7 @@ import AppNavbar from "../components/AppNavbar/AppNavbar";
 import { app } from "../firebase/firebaseConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/router";
+import HomePageHeader from "../components/HomePage/HomePageHeader";
 const Home = () => {
   const { colorScheme } = useMantineColorScheme();
   const router = useRouter();
@@ -29,7 +30,9 @@ const Home = () => {
           className={
             colorScheme === "dark" ? "dark w-full h-full" : "w-full h-full"
           }
-        ></div>
+        >
+          <HomePageHeader />
+        </div>
       </AppShell>
     </>
   );
