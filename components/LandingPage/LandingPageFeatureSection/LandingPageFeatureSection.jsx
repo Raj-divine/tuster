@@ -4,7 +4,7 @@ import featureImage1 from "../../../assets/imgs/featureImage1.png";
 import featureImage2 from "../../../assets/imgs/featureImage2.png";
 import featureImage3 from "../../../assets/imgs/featureImage3.png";
 
-const featureData = [
+const FEATURE_DATA = [
   {
     image: featureImage1,
     heading: "Be more confident than ever before",
@@ -49,7 +49,7 @@ const FeatureSection = () => {
           cols={1}
           spacing={70}
         >
-          {featureData.map((feature, index) => {
+          {FEATURE_DATA.map((feature, index) => {
             return <Feature key={index} blob="blob-3" {...feature} />;
           })}
         </SimpleGrid>

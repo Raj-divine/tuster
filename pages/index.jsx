@@ -26,11 +26,11 @@ export default function LandingPage() {
     });
   }, [auth]);
 
-  useEffect(() => {
-    signOut(auth)
-      .then((res) => {})
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   signOut(auth)
+  //     .then((res) => {})
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   return (
     <>

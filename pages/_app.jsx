@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import { MantineProvider, ColorSchemeProvider } from "@mantine/core";
+import { NotificationsProvider } from "@mantine/notifications";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 import Head from "next/head";
 import { store } from "../context/store";
@@ -39,7 +40,9 @@ function MyApp({ Component, pageProps }) {
           withGlobalStyles
           withNormalizeCSS
         >
-          <Component {...pageProps} />
+          <NotificationsProvider>
+            <Component {...pageProps} />
+          </NotificationsProvider>
         </MantineProvider>
       </ColorSchemeProvider>
     </Provider>
