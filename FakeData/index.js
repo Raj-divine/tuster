@@ -66,7 +66,7 @@ export const TESTIMONIAL_DATA = [
   {
     name: "Nicholas Nash",
     username: "@nicholasnash",
-    text: `I landed a job at google as a software engineer! 
+    text: `I landed a job at google as a software engineer!
     all thanks to the amazing teachers @tuster. I am deeply in love
      with the way teacher can build your confidence and make you feel like you are in the right place.`,
     uploadedOn: "22nd dec 2021 on twitter",
@@ -82,7 +82,7 @@ export const TESTIMONIAL_DATA = [
   {
     name: "jessica",
     username: "@jessiknows",
-    text: `Quick shoutout to @tuster for saving me a lot of time 
+    text: `Quick shoutout to @tuster for saving me a lot of time
     and money. Finding tutors for a 1 on 1 mentoring session for
      my son was a nightmare for me, Good thing i found out about @tuster `,
     uploadedOn: "12th feb 2022 on facebook",
