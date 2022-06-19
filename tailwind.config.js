@@ -8,6 +8,7 @@ module.exports = {
     fontFamily: {
       montserrat: ["Montserrat", "sans-serif"],
       raleway: ["Raleway", "sans-serif"],
+      merriweather: ["Merriweather", "serif"],
       dancingScript: ["Dancing Script", "cursive"],
     },
     extend: {
