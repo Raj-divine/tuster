@@ -5,7 +5,7 @@ import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 import Head from "next/head";
 import { store } from "../context/store";
 import { Provider } from "react-redux";
-
+import { app } from "../firebase/firebaseConfig";
 function MyApp({ Component, pageProps }) {
   const [colorScheme, setColorScheme] = useLocalStorage({
     key: "mantine-color-scheme",

@@ -52,9 +52,9 @@ const submitHandler = async ({
           },
         });
         showNotification({
+          autoClose: 3000,
           title: "Sign Up Successful",
           message: "You have successfully signed up!",
-          autoClose: 2000,
           color: "teal",
         });
       }
@@ -65,9 +65,9 @@ const submitHandler = async ({
           formData.password
         );
         showNotification({
+          autoClose: 3000,
           title: "Sign In Successful",
           message: "happy to see you again!",
-          autoClose: 2000,
           color: "teal",
         });
       }
