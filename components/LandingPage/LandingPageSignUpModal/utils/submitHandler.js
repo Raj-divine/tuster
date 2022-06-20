@@ -5,7 +5,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 const submitHandler = async ({
   errors,
@@ -17,6 +17,7 @@ const submitHandler = async ({
   setErrors,
   setIsLoggingIn,
   closeModal,
+  setUser,
 }) => {
   try {
     if (
@@ -38,11 +39,10 @@ const submitHandler = async ({
         );
         const user = userCredential.user;
 
-        await setDoc(doc(db, "users", user.uid), {
+        const userDoc = {
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
-          hashedPassword: user.reloadUserInfo.passwordHash,
           subjects: formData.subjects,
           address: formData.address,
           phone: formData.phone,
@@ -50,7 +50,10 @@ const submitHandler = async ({
             latitude: coords.latitude,
             longitude: coords.longitude,
           },
-        });
+        };
+
+        await setDoc(doc(db, "users", user.uid), userDoc);
+        setUser(userDoc);
         showNotification({
           autoClose: 3000,
           title: "Sign Up Successful",
@@ -59,11 +62,19 @@ const submitHandler = async ({
         });
       }
       if (isLoggingIn) {
-        await signInWithEmailAndPassword(
+        const userCredential = await signInWithEmailAndPassword(
           auth,
           formData.email,
           formData.password
         );
+
+        const user = userCredential.user;
+
+        const docRef = doc(db, "users", user.uid);
+
+        const docSnap = await getDoc(docRef);
+        setUser(docSnap.data());
+
         showNotification({
           autoClose: 3000,
           title: "Sign In Successful",
@@ -100,7 +111,6 @@ const submitHandler = async ({
       });
       setActive(0);
     }
-    console.log(error.code);
   }
 };
 

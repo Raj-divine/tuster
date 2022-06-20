@@ -5,6 +5,8 @@ import addressFocusHandler from "./utils/addressFocusHandler";
 
 import { Modal, Button, Text, Stepper } from "@mantine/core";
 
+import { useLocalStorage } from "@mantine/hooks";
+
 import { useRouter } from "next/router";
 
 import { useEffect, useState } from "react";
@@ -14,6 +16,10 @@ import LandingPageSignUpModalSectionTwo from "./LandingPageSignUpModalSectionTwo
 import LandingPageLoginModal from "./LandingPageLoginModal/LandingPageLoginModal";
 
 const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
+  const [user, setUser] = useLocalStorage({
+    key: "user-data",
+    defaultValue: null,
+  });
   const [active, setActive] = useState(0);
   const [subjects, setSubjects] = useState([]);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
@@ -90,6 +96,7 @@ const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
             setErrors,
             setIsLoggingIn,
             closeModal,
+            setUser,
           });
         }}
       >
