@@ -9,8 +9,9 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import AppLoader from "../components/AppLoader/AppLoader";
-
+import { useLocalStorage } from "@mantine/hooks";
 export default function LandingPage() {
+  const [user, setUser] = useLocalStorage({ key: "user-data" });
   const { colorScheme } = useMantineColorScheme();
   const router = useRouter();
   const auth = getAuth();
@@ -28,7 +29,9 @@ export default function LandingPage() {
 
   useEffect(() => {
     signOut(auth)
-      .then((res) => {})
+      .then((res) => {
+        setUser(null);
+      })
       .catch((err) => console.log(err));
   }, []);
 

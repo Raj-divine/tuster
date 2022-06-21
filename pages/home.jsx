@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import HomePageHeader from "../components/HomePage/HomePageHeader/HomePageHeader";
 import AppLoader from "../components/AppLoader/AppLoader";
 import HomePageInterestSection from "../components/HomePage/HomePageInterestSection/HomePageInterestSection";
+
 const Home = () => {
   const { colorScheme } = useMantineColorScheme();
   const [userLoggedIn, setUserLoggedIn] = useState(false);
