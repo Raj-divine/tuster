@@ -74,7 +74,6 @@ const submitHandler = async ({
 
         const docSnap = await getDoc(docRef);
         setUser(docSnap.data());
-
         showNotification({
           autoClose: 3000,
           title: "Sign In Successful",

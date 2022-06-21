@@ -31,6 +31,7 @@ export default function LandingPage() {
     signOut(auth)
       .then((res) => {
         setUser(null);
+        setUserLoggedIn(false);
       })
       .catch((err) => console.log(err));
   }, []);
