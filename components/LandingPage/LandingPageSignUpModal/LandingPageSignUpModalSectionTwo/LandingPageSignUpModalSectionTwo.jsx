@@ -20,7 +20,7 @@ const LandingPageSignUpModalSectionTwo = ({
           nothingFound="Nothing found"
           clearButtonLabel="Clear selection"
           clearable
-          maxSelectedValues={15}
+          maxSelectedValues={10}
           required
           description="Search for more subjects"
           limit={20}

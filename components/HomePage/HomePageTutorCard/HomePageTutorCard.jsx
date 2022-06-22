@@ -24,7 +24,7 @@ const HomePageTutor = ({ tutor }) => {
     pricing,
   } = tutor;
   return (
-    <div className="flex flex-col md:flex-row 2xl:w-2/3 xl:w-11/12 md:h-64 lg:h-72 xl:h-60 mt-10 overflow-hidden rounded-lg dark:shadow-md shadow bg-slate-50 dark:bg-dark-600">
+    <div className="flex flex-col md:flex-row  md:h-64 lg:h-72 xl:h-60 mb-10 overflow-hidden rounded-lg dark:shadow-md shadow bg-slate-50 dark:bg-dark-600">
       <div className="md:w-1/4 h-60 sm:h-[500px] md:h-full relative">
         <Image
           className="object-cover object-center"
@@ -52,8 +52,9 @@ const HomePageTutor = ({ tutor }) => {
         <div className="flex flex-col sm:flex-row items-end justify-between w-full  sm:h-24 lg:h-36 xl:h-24 mt-4 sm:mt-0">
           <div className="lg:w-2/5 sm:w-1/2 w-full">
             <SimpleGrid
-              cols={3}
               breakpoints={[
+                { minWidth: 300, cols: 2 },
+                { minWidth: 640, cols: 3 },
                 { minWidth: 1024, cols: 2 },
                 { minWidth: 1280, cols: 3 },
               ]}
