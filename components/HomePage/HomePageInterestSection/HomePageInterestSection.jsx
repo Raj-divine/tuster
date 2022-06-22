@@ -21,29 +21,21 @@ const HomePageInterestSection = () => {
   const [tutors, setTutors] = useState([]);
   const [latestDoc, setLatestDoc] = useState("0");
   const [isFinal, setIsFinal] = useState(false);
-  const [userData, setUserData] = useLocalStorage({ key: "user-data" });
 
-  console.log(isFinal);
-
-  useEffect(() => {
-    const getUser = async () => {
-      const { currentUser } = getAuth();
-
-      const userRef = doc(db, "users", currentUser.uid);
-
-      const userSnapshot = await getDoc(userRef);
-
-      setUserData(userSnapshot.data());
-    };
-    getUser();
-  }, []);
+  useEffect(() => {}, []);
 
   async function getData() {
     const tutorRef = collection(db, "tutors");
 
+    const { currentUser } = getAuth();
+
+    const userRef = doc(db, "users", currentUser.uid);
+
+    const userSnapshot = await getDoc(userRef);
+
     const q = query(
       tutorRef,
-      where("experties", "array-contains-any", userData.subjects),
+      where("experties", "array-contains-any", userSnapshot.data().subjects),
       orderBy("rating", "desc"),
       limit(10),
       startAfter(latestDoc)
@@ -56,6 +48,7 @@ const HomePageInterestSection = () => {
     if (tutorData.length < 10) {
       setIsFinal(true);
     }
+
     setTutors((prevTutor) => [...prevTutor, ...tutorData]);
     setLatestDoc(tutorSnapshot.docs[tutorSnapshot.docs.length - 1] || null);
   }
@@ -65,14 +58,14 @@ const HomePageInterestSection = () => {
   }, []);
 
   return (
-    <section className="px-10 pt-10 2xl:w-2/3 xl:w-11/12">
+    <section className="px-4 sm:px-10  pt-10 2xl:w-2/3 xl:w-11/12">
       <h3 className="font-merriweather italic text-xl xs:text-2xl sm:text-4xl ">
         Based on your interests, Raj
       </h3>
       <Space h={100} />
 
       <ScrollArea
-        className="rounded-lg border relative p-10 dark:border-dark-400"
+        className="rounded-lg border relative p-2 sm:p-4 lg:p-10 dark:border-dark-400"
         style={{ height: 900 }}
       >
         {tutors.map((tutor) => {
