@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import HomePageHeader from "../components/HomePage/HomePageHeader/HomePageHeader";
 import AppLoader from "../components/AppLoader/AppLoader";
 import HomePageInterestSection from "../components/HomePage/HomePageInterestSection/HomePageInterestSection";
+import HomePageNewSubSection from "../components/HomePage/HomePageNewSubSection/HomePageNewSubSection";
 
 const Home = () => {
   const { colorScheme } = useMantineColorScheme();
@@ -46,6 +47,7 @@ const Home = () => {
             <HomePageHeader />
             <Divider my="sm" className="p-0 m-0" />
             <HomePageInterestSection />
+            <HomePageNewSubSection />
           </div>
         </AppShell>
       )}

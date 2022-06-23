@@ -1,32 +1,27 @@
-import HomePageTutorCard from "../HomePageTutorCard/HomePageTutorCard";
+import { ScrollArea, Center, Text, Loader, Button } from "@mantine/core";
+import { useState } from "react";
 import {
   collection,
   getDocs,
   query,
-  where,
-  limit,
   orderBy,
+  limit,
   startAfter,
 } from "firebase/firestore";
-import { Button, Center, Loader, ScrollArea, Space, Text } from "@mantine/core";
-import { db } from "../../../firebase/firebaseConfig.js";
+import { db } from "../../../firebase/firebaseConfig";
 import { useEffect } from "react";
-import { useState } from "react";
-import { getUserData } from "../../../utilities";
-const HomePageInterestSection = () => {
+import HomePageTutorCard from "../HomePageTutorCard/HomePageTutorCard";
+const HomePageNewSubSection = () => {
   const [tutors, setTutors] = useState([]);
   const [latestDoc, setLatestDoc] = useState("0");
   const [isFinal, setIsFinal] = useState(false);
 
-  async function getTutors() {
-    const user = await getUserData();
-
-    const tutorRef = collection(db, "tutors");
+  const getTutors = async () => {
+    const tutorsRef = collection(db, "tutors");
 
     const q = query(
-      tutorRef,
-      where("experties", "array-contains-any", user.data().subjects),
-      orderBy("rating", "desc"),
+      tutorsRef,
+      orderBy("totalStudents", "desc"),
       limit(10),
       startAfter(latestDoc)
     );
@@ -41,7 +36,7 @@ const HomePageInterestSection = () => {
 
     setTutors((prevTutor) => [...prevTutor, ...tutorData]);
     setLatestDoc(tutorSnapshot.docs[tutorSnapshot.docs.length - 1] || null);
-  }
+  };
 
   useEffect(() => {
     getTutors();
@@ -50,9 +45,8 @@ const HomePageInterestSection = () => {
   return (
     <section className="px-4 sm:px-10 pt-10 2xl:w-2/3 xl:w-11/12">
       <h3 className="font-merriweather italic text-xl xs:text-2xl sm:text-4xl ">
-        Based on your interests, Raj
+        Let's try something new!
       </h3>
-
       <ScrollArea
         className="rounded-lg border relative p-2 sm:p-4 lg:p-10 dark:border-dark-400 mt-11"
         style={{ height: 900 }}
@@ -87,4 +81,4 @@ const HomePageInterestSection = () => {
   );
 };
 
-export default HomePageInterestSection;
+export default HomePageNewSubSection;

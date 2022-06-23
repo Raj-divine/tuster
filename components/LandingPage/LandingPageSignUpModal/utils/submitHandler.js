@@ -53,6 +53,7 @@ const submitHandler = async ({
         };
 
         await setDoc(doc(db, "users", user.uid), userDoc);
+
         setUser(userDoc);
         showNotification({
           autoClose: 3000,

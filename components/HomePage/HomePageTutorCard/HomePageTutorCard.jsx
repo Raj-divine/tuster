@@ -50,7 +50,7 @@ const HomePageTutor = ({ tutor }) => {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row items-end justify-between w-full  sm:h-24 lg:h-36 xl:h-24 mt-4 sm:mt-0">
-          <div className="lg:w-2/5 sm:w-1/2 w-full">
+          <div className="lg:w-1/2 sm:w-1/2 w-full">
             <SimpleGrid
               breakpoints={[
                 { minWidth: 300, cols: 2 },
