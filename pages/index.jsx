@@ -30,7 +30,7 @@ export default function LandingPage() {
   useEffect(() => {
     signOut(auth)
       .then((res) => {
-        setUser(null);
+        setUser({});
         setUserLoggedIn(false);
       })
       .catch((err) => console.log(err));
