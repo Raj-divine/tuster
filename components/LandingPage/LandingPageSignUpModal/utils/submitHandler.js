@@ -1,5 +1,6 @@
-import { app, db } from "../../../../firebase/firebaseConfig";
+import { db } from "../../../../firebase/firebaseConfig";
 import { showNotification } from "@mantine/notifications";
+import { addUser } from "../../../../context/userSlice";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -17,7 +18,7 @@ const submitHandler = async ({
   setErrors,
   setIsLoggingIn,
   closeModal,
-  setUser,
+  dispatch,
 }) => {
   try {
     if (
@@ -53,8 +54,7 @@ const submitHandler = async ({
         };
 
         await setDoc(doc(db, "users", user.uid), userDoc);
-
-        setUser(userDoc);
+        dispatch(addUser({ user: { ...userDoc, uid: user.uid } }));
         showNotification({
           autoClose: 3000,
           title: "Sign Up Successful",
@@ -74,7 +74,9 @@ const submitHandler = async ({
         const docRef = doc(db, "users", user.uid);
 
         const docSnap = await getDoc(docRef);
-        setUser(docSnap.data());
+
+        dispatch(addUser({ user: { ...docSnap.data(), uid: user.uid } }));
+
         showNotification({
           autoClose: 3000,
           title: "Sign In Successful",
