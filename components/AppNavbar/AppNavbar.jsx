@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { AiOutlineHome, AiOutlineContacts } from "react-icons/ai";
-import { useLocalStorage } from "@mantine/hooks";
 import { IoIosArrowForward } from "react-icons/io";
-
+import { useEffect, useState } from "react";
+import { getUserData } from "../../utilities";
 const NavLink = ({ children, href, exact, ...props }) => {
   const { pathname } = useRouter();
   const isActive = pathname === href;
@@ -29,7 +29,22 @@ const NavLink = ({ children, href, exact, ...props }) => {
 const AppNavbar = () => {
   const { colorScheme } = useMantineColorScheme();
   const { isOpen } = useSelector((state) => state.navbar);
-  const [user, setUser] = useLocalStorage({ key: "user-data" });
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const user = await getUserData();
+      setUser(user);
+    };
+    getUser();
+  }, []);
+
+  useEffect(() => {
+    console.log("changed");
+  }, [user]);
+
+  console.log(user);
+
   return (
     <Navbar
       p={15}
@@ -54,7 +69,7 @@ const AppNavbar = () => {
           </li>
         </ul>
       </Navbar.Section>
-      <Navbar.Section className="mb-16 border-t border-t-gray-300 dark:border-t-dark-300">
+      {/* <Navbar.Section className="mb-16 border-t border-t-gray-300 dark:border-t-dark-300">
         <Link href={`/${user.uid}`}>
           <div className="flex mt-3 h-16 w-full items-center p-2 rounded-lg justify-between dark:hover:bg-dark-800 hover:bg-gray-100 cursor-pointer">
             <div>
@@ -78,7 +93,7 @@ const AppNavbar = () => {
             </div>
           </div>
         </Link>
-      </Navbar.Section>
+      </Navbar.Section> */}
     </Navbar>
   );
 };

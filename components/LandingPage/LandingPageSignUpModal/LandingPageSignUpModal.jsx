@@ -5,7 +5,7 @@ import addressFocusHandler from "./utils/addressFocusHandler";
 
 import { Modal, Button, Text, Stepper } from "@mantine/core";
 
-import { useDispatch } from "react-redux";
+import { useLocalStorage } from "@mantine/hooks";
 
 import { useRouter } from "next/router";
 
@@ -22,8 +22,7 @@ const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
   const [coords, setCoords] = useState({});
   const router = useRouter();
 
-  const dispatch = useDispatch();
-
+  const [user, setUser] = useLocalStorage({ key: "user-data" });
   useEffect(() => {
     setIsLoggingIn(openWithLogin);
   }, [openWithLogin]);
@@ -94,7 +93,7 @@ const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
             setErrors,
             setIsLoggingIn,
             closeModal,
-            dispatch,
+            setUser,
           });
         }}
       >

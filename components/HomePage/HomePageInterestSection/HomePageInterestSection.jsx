@@ -8,18 +8,10 @@ import {
   orderBy,
   startAfter,
 } from "firebase/firestore";
-import {
-  Button,
-  Center,
-  Loader,
-  ScrollArea,
-  TextInput,
-  Text,
-  Select,
-  Space,
-} from "@mantine/core";
+import { Button, Center, Loader, ScrollArea, Text } from "@mantine/core";
 import { db } from "../../../firebase/firebaseConfig.js";
 import { useEffect } from "react";
+
 import { useState } from "react";
 import { getUserData } from "../../../utilities";
 import { useLocalStorage } from "@mantine/hooks";
@@ -32,7 +24,6 @@ const HomePageInterestSection = () => {
 
   async function getTutors() {
     const tutorRef = collection(db, "tutors");
-
     const user = await getUserData();
 
     const q = query(

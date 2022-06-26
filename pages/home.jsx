@@ -13,7 +13,6 @@ import HomePageNewSubSection from "../components/HomePage/HomePageNewSubSection/
 const Home = () => {
   const { colorScheme } = useMantineColorScheme();
   const [userLoggedIn, setUserLoggedIn] = useState(false);
-
   const router = useRouter();
   const auth = getAuth();
 
