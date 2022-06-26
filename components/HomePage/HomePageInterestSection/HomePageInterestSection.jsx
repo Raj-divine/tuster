@@ -8,16 +8,26 @@ import {
   orderBy,
   startAfter,
 } from "firebase/firestore";
-import { Button, Center, Loader, ScrollArea, Space, Text } from "@mantine/core";
+import {
+  Button,
+  Center,
+  Loader,
+  ScrollArea,
+  TextInput,
+  Text,
+  Select,
+  Space,
+} from "@mantine/core";
 import { db } from "../../../firebase/firebaseConfig.js";
 import { useEffect } from "react";
 import { useState } from "react";
 import { getUserData } from "../../../utilities";
 import { useLocalStorage } from "@mantine/hooks";
+
 const HomePageInterestSection = () => {
   const [tutors, setTutors] = useState([]);
-  const [latestDoc, setLatestDoc] = useState("0");
   const [isFinal, setIsFinal] = useState(false);
+  const [latestDoc, setLatestDoc] = useState("0");
   const [userData] = useLocalStorage({ key: "user-data" });
 
   async function getTutors() {
@@ -37,7 +47,7 @@ const HomePageInterestSection = () => {
     const tutorData = tutorSnapshot.docs.map((doc) => {
       return { ...doc.data(), uid: doc.id };
     });
-    if (tutorData.length < 10) {
+    if (tutorData.length % 10 !== 0) {
       setIsFinal(true);
     }
 
@@ -50,7 +60,7 @@ const HomePageInterestSection = () => {
   }, []);
 
   return (
-    <section className="px-4 sm:px-10 pt-10 ">
+    <section className="px-4 sm:px-10 pt-10 justify-between">
       <h3 className="font-merriweather italic text-xl xs:text-2xl sm:text-4xl ">
         Based on your interests, {userData.firstName}
       </h3>
@@ -74,7 +84,7 @@ const HomePageInterestSection = () => {
             </Center>
           )}
 
-          {isFinal && tutors.length && (
+          {isFinal && tutors.length !== 0 && (
             <Center>
               <Text className="text-2xl">No More Tutors</Text>
             </Center>

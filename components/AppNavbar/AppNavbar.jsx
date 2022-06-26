@@ -1,10 +1,10 @@
-import { Navbar, Center } from "@mantine/core";
+import { Navbar, useMantineColorScheme, Avatar, Text } from "@mantine/core";
 import { useRouter } from "next/router";
-import { useMantineColorScheme } from "@mantine/core";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { AiOutlineHome, AiOutlineContacts } from "react-icons/ai";
-
+import { useLocalStorage } from "@mantine/hooks";
+import { IoIosArrowForward } from "react-icons/io";
 const NavLink = ({ children, href, exact, ...props }) => {
   const { pathname } = useRouter();
   const isActive = pathname === href;
@@ -28,16 +28,17 @@ const NavLink = ({ children, href, exact, ...props }) => {
 const AppNavbar = () => {
   const { colorScheme } = useMantineColorScheme();
   const { isOpen } = useSelector((state) => state.navbar);
+  const [user, setUser] = useLocalStorage({ key: "user-data" });
   return (
     <Navbar
       p={15}
       className={colorScheme === "dark" ? "dark" : ""}
-      width={{ base: 250 }}
+      width={{ base: 300 }}
       hidden={!isOpen}
       height="100%"
       hiddenBreakpoint="md"
     >
-      <Navbar.Section>
+      <Navbar.Section grow>
         <ul>
           <li>
             <NavLink href="/home">
@@ -51,6 +52,29 @@ const AppNavbar = () => {
             </NavLink>
           </li>
         </ul>
+      </Navbar.Section>
+      <Navbar.Section className="mb-16 border-t border-t-gray-300 dark:border-t-dark-300">
+        <div className="flex mt-3 h-16 w-full items-center p-2 rounded-lg justify-between dark:hover:bg-dark-800 hover:bg-gray-100 cursor-pointer">
+          <div>
+            <Avatar
+              classNames={{
+                placeholder: "bg-teal-500 text-white",
+              }}
+              radius="xl"
+            >
+              {user.firstName[0].toUpperCase()}
+            </Avatar>
+          </div>
+          <div className="ml-4 w-3/4">
+            <Text className="text-sm truncate w-4/5">
+              {user.firstName} {user.lastName}
+            </Text>
+            <Text className="text-xs truncate w-4/5">{user.email}</Text>
+          </div>
+          <div>
+            <IoIosArrowForward />
+          </div>
+        </div>
       </Navbar.Section>
     </Navbar>
   );
