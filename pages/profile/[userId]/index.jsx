@@ -11,6 +11,7 @@ import Head from "next/head";
 import ProfilePageMainProfile from "../../../components/ProfilePage/ProfilePageMainProfile/ProfilePageMainProfile";
 import ProfilePageSocial from "../../../components/ProfilePage/ProfilePageSocial/ProfilePageSocial";
 import ProfilePageEditSocial from "../../../components/ProfilePage/ProfilePageEditSocial/ProfilePageEditSocial";
+import ProfilePageEditSection from "../../../components/ProfilePage/ProfilePageEditSection/ProfilePageEditSection";
 
 const ProfilePage = () => {
   const { colorScheme } = useMantineColorScheme();
@@ -38,7 +39,6 @@ const ProfilePage = () => {
       </Head>
       {userLoggedIn && (
         <AppShell
-          padding={0}
           navbarOffsetBreakpoint="md"
           fixed
           header={<AppHeader />}
@@ -47,11 +47,12 @@ const ProfilePage = () => {
           <div
             className={`${
               colorScheme === "dark" ? "dark" : ""
-            } w-4/5 my-0 mx-auto h-full grid grid-cols-3 grid-rows-3 gap-x-3 gap-y-3`}
+            } 2xl:w-11/12 my-0 mx-auto h-full grid grid-cols-3 grid-rows-3 gap-3`}
           >
             <ProfilePageMainProfile />
             <ProfilePageSocial />
             <ProfilePageEditSocial />
+            {/* <ProfilePageEditSection /> */}
           </div>
         </AppShell>
       )}

@@ -1,4 +1,4 @@
-import { TextInput, Button } from "@mantine/core";
+import { TextInput, Button, Space } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 import { showNotification } from "@mantine/notifications";
 import { useState } from "react";
@@ -31,13 +31,10 @@ const ProfilePageEditSocial = () => {
   };
 
   return (
-    <div className="col-span-2 p-8 row-span-1 rounded-lg border dark:border-dark-400">
-      <form
-        onSubmit={submitHandler}
-        className="grid grid-cols-2 grid-row-3 gap-6"
-      >
-        <div className="col-span-1 row-span-2">
-          <div className="mb-6">
+    <div className="col-span-2 row-span-1 p-8 rounded-lg border dark:border-dark-400">
+      <form onSubmit={submitHandler}>
+        <div className="flex">
+          <div className="mb-6 w-1/2">
             <TextInput
               value={user.socials.instagram && socials.instagram}
               placeholder="Add Instagram Handle"
@@ -52,7 +49,9 @@ const ProfilePageEditSocial = () => {
               }
             />
           </div>
-          <div>
+          <Space w={20} />
+
+          <div className="w-1/2 ">
             <TextInput
               value={user.socials.instagram && socials.twitter}
               placeholder="Add Twitter Handle"
@@ -68,8 +67,9 @@ const ProfilePageEditSocial = () => {
             />
           </div>
         </div>
-        <div className="col-span-1 row-span-2">
-          <div className="mb-6">
+
+        <div className=" flex">
+          <div className="mb-6 w-1/2">
             <TextInput
               value={user.socials.instagram && socials.linkedin}
               placeholder="Add LinkedIn Handle"
@@ -84,7 +84,8 @@ const ProfilePageEditSocial = () => {
               }
             />
           </div>
-          <div>
+          <Space w={20} />
+          <div className="w-1/2 ">
             <TextInput
               value={user.socials.instagram && socials.facebook}
               placeholder="Add Facebook Handle"
@@ -100,7 +101,7 @@ const ProfilePageEditSocial = () => {
             />
           </div>
         </div>
-        <div className="row-span-1 col-start-2 flex justify-end mt-8">
+        <div className="col-start-2 flex justify-end ">
           <Button
             type="submit"
             className="bg-teal-400 hover:bg-teal-500 dark:hover:bg-teal-600"

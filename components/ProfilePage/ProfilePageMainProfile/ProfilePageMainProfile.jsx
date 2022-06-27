@@ -5,15 +5,15 @@ const ProfilePageMainProfile = () => {
   const [user] = useLocalStorage({ key: "user-data" });
   return (
     <div className="col-span-1 row-span-2 mt-10 border rounded-lg dark:border-dark-400">
-      <div className="flex h-full flex-col items-center justify-between">
-        <div className="flex flex-col items-center">
+      <div className="flex h-full flex-col items-center justify-around">
+        <div className="flex w-full flex-col items-center">
           <div className="mt-8">
             <Center className="rounded-full bg-teal-500 h-28 w-28 text-white text-3xl">
               {user.firstName[0].toUpperCase()}
               {user.lastName[0].toUpperCase()}
             </Center>
           </div>
-          <div className="mt-4 text-center">
+          <div className="mt-4 text-center w-11/12">
             <Text className="text-2xl font-semibold">
               {user.firstName} {user.lastName}
             </Text>
