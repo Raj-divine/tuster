@@ -32,9 +32,13 @@ const ProfilePageMainProfile = () => {
           <div className="p-4 w-full">
             <Text className="mb-4">Your interests:</Text>
             <SimpleGrid cols={2}>
-              {user.subjects.map((item) => {
+              {user.subjects.map((item, index) => {
                 return (
-                  <Badge color="teal" className="w-full">
+                  <Badge
+                    key={`${item}${index}`}
+                    color="teal"
+                    className="w-full"
+                  >
                     {item}
                   </Badge>
                 );

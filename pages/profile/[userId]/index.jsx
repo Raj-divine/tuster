@@ -10,6 +10,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import Head from "next/head";
 import ProfilePageMainProfile from "../../../components/ProfilePage/ProfilePageMainProfile/ProfilePageMainProfile";
 import ProfilePageSocial from "../../../components/ProfilePage/ProfilePageSocial/ProfilePageSocial";
+import ProfilePageEditSocial from "../../../components/ProfilePage/ProfilePageEditSocial/ProfilePageEditSocial";
 
 const ProfilePage = () => {
   const { colorScheme } = useMantineColorScheme();
@@ -46,10 +47,11 @@ const ProfilePage = () => {
           <div
             className={`${
               colorScheme === "dark" ? "dark" : ""
-            } w-4/5 my-0 mx-auto h-full grid grid-cols-3 grid-rows-3 gap-x-3`}
+            } w-4/5 my-0 mx-auto h-full grid grid-cols-3 grid-rows-3 gap-x-3 gap-y-3`}
           >
             <ProfilePageMainProfile />
             <ProfilePageSocial />
+            <ProfilePageEditSocial />
           </div>
         </AppShell>
       )}

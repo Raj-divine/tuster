@@ -11,13 +11,13 @@ const submitHandler = async ({
   errors,
   router,
   formData,
-  coords,
   isLoggingIn,
   setFormData,
   setErrors,
   setIsLoggingIn,
   closeModal,
   setUser,
+  setActive,
 }) => {
   try {
     if (
@@ -46,10 +46,7 @@ const submitHandler = async ({
           subjects: formData.subjects,
           address: formData.address,
           phone: formData.phone,
-          coords: {
-            latitude: coords.latitude,
-            longitude: coords.longitude,
-          },
+          socials: {},
         };
 
         await setDoc(doc(db, "users", user.uid), userDoc);

@@ -1,7 +1,6 @@
-const addressFocusHandler = (setCoords, setFormData) => {
+const addressFocusHandler = (setFormData) => {
   if (window.navigator.geolocation) {
     window.navigator.geolocation.getCurrentPosition(async (location) => {
-      setCoords(location.coords);
       const { latitude, longitude } = location.coords;
 
       const response = await fetch(

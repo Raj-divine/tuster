@@ -1,4 +1,5 @@
 import { Text, Divider } from "@mantine/core";
+import { useLocalStorage } from "@mantine/hooks";
 import {
   AiFillInstagram,
   AiOutlineTwitter,
@@ -22,19 +23,23 @@ const SocialTableRow = ({ children, platform }) => {
 };
 
 const ProfilePageSocial = () => {
+  const [user] = useLocalStorage({ key: "user-data" });
+
+  const { instagram, linkedin, twitter, facebook } = user.socials;
+
   return (
     <div className="col-span-2 p-8 row-span-1 mt-10 rounded-lg border dark:border-dark-400">
       <SocialTableRow platform={<AiFillInstagram />}>
-        @raj_divine_
+        {instagram ? instagram : "Not provided"}
       </SocialTableRow>
       <SocialTableRow platform={<AiOutlineTwitter />}>
-        @raj_divine_
+        {twitter ? twitter : "Not provided"}
       </SocialTableRow>
       <SocialTableRow platform={<AiFillLinkedin />}>
-        @raj_divine_
+        {linkedin ? linkedin : "Not provided"}
       </SocialTableRow>
       <SocialTableRow platform={<AiFillFacebook />}>
-        @raj_divine_
+        {facebook ? facebook : "Not provided"}
       </SocialTableRow>
     </div>
   );

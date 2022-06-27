@@ -19,7 +19,6 @@ const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
   const [active, setActive] = useState(0);
   const [subjects, setSubjects] = useState([]);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
-  const [coords, setCoords] = useState({});
   const router = useRouter();
 
   const [user, setUser] = useLocalStorage({ key: "user-data" });
@@ -87,13 +86,13 @@ const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
             errors,
             router,
             formData,
-            coords,
             isLoggingIn,
             setFormData,
             setErrors,
             setIsLoggingIn,
             closeModal,
             setUser,
+            setActive,
           });
         }}
       >
@@ -131,7 +130,6 @@ const LandingPageSignUpModal = ({ opened, closeModal, openWithLogin }) => {
                 errors={errors}
                 addressFocusHandler={addressFocusHandler.bind(
                   this,
-                  setCoords,
                   setFormData
                 )}
               />
