@@ -1,4 +1,4 @@
-import { TextInput, Button, Space } from "@mantine/core";
+import { TextInput, Button, Space, ScrollArea, Text } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 import { showNotification } from "@mantine/notifications";
 import { useState } from "react";
@@ -31,85 +31,90 @@ const ProfilePageEditSocial = () => {
   };
 
   return (
-    <div className="col-span-2 row-span-1 p-8 rounded-lg border dark:border-dark-400">
-      <form onSubmit={submitHandler}>
-        <div className="flex">
-          <div className="mb-6 w-1/2">
-            <TextInput
-              value={user.socials.instagram && socials.instagram}
-              placeholder="Add Instagram Handle"
-              label="Instagram handle"
-              onChange={(e) =>
-                setSocials((prevSocial) => {
-                  return {
-                    ...prevSocial,
-                    instagram: e.target.value,
-                  };
-                })
-              }
-            />
-          </div>
-          <Space w={20} />
+    <div className="lg:col-span-1 lg:row-span-1 xl:col-span-1 xl:row-span-1 xl:col-start-2 2xl:col-span-2 2xl:row-span-1 p-8 rounded-lg border dark:border-dark-400">
+      <ScrollArea style={{ height: 250 }} type="scroll">
+        <Text color="dimmed" className="text-lg mb-2">
+          Add/Edit your socials
+        </Text>
+        <form onSubmit={submitHandler}>
+          <div className="flex flex-col sm:flex-row">
+            <div className="mb-6 sm:w-1/2">
+              <TextInput
+                value={user.socials.instagram && socials.instagram}
+                placeholder="Add Instagram Handle"
+                label="Instagram handle"
+                onChange={(e) =>
+                  setSocials((prevSocial) => {
+                    return {
+                      ...prevSocial,
+                      instagram: e.target.value,
+                    };
+                  })
+                }
+              />
+            </div>
+            <Space w={20} />
 
-          <div className="w-1/2 ">
-            <TextInput
-              value={user.socials.instagram && socials.twitter}
-              placeholder="Add Twitter Handle"
-              label="twitter handle"
-              onChange={(e) =>
-                setSocials((prevSocial) => {
-                  return {
-                    ...prevSocial,
-                    twitter: e.target.value,
-                  };
-                })
-              }
-            />
+            <div className="mb-6 sm:mb-0 sm:w-1/2">
+              <TextInput
+                value={user.socials.instagram && socials.twitter}
+                placeholder="Add Twitter Handle"
+                label="twitter handle"
+                onChange={(e) =>
+                  setSocials((prevSocial) => {
+                    return {
+                      ...prevSocial,
+                      twitter: e.target.value,
+                    };
+                  })
+                }
+              />
+            </div>
           </div>
-        </div>
 
-        <div className=" flex">
-          <div className="mb-6 w-1/2">
-            <TextInput
-              value={user.socials.instagram && socials.linkedin}
-              placeholder="Add LinkedIn Handle"
-              label="linkedin handle"
-              onChange={(e) =>
-                setSocials((prevSocial) => {
-                  return {
-                    ...prevSocial,
-                    linkedin: e.target.value,
-                  };
-                })
-              }
-            />
+          <div className="flex flex-col sm:flex-row">
+            <div className="mb-6 sm:w-1/2">
+              <TextInput
+                value={user.socials.instagram && socials.linkedin}
+                placeholder="Add LinkedIn Handle"
+                label="linkedin handle"
+                onChange={(e) =>
+                  setSocials((prevSocial) => {
+                    return {
+                      ...prevSocial,
+                      linkedin: e.target.value,
+                    };
+                  })
+                }
+              />
+            </div>
+            <Space w={20} />
+            <div className="mb-6 sm:mb-0  sm:w-1/2">
+              <TextInput
+                value={user.socials.instagram && socials.facebook}
+                placeholder="Add Facebook Handle"
+                label="facebook handle"
+                onChange={(e) =>
+                  setSocials((prevSocial) => {
+                    return {
+                      ...prevSocial,
+                      facebook: e.target.value,
+                    };
+                  })
+                }
+              />
+            </div>
           </div>
-          <Space w={20} />
-          <div className="w-1/2 ">
-            <TextInput
-              value={user.socials.instagram && socials.facebook}
-              placeholder="Add Facebook Handle"
-              label="facebook handle"
-              onChange={(e) =>
-                setSocials((prevSocial) => {
-                  return {
-                    ...prevSocial,
-                    facebook: e.target.value,
-                  };
-                })
-              }
-            />
+          <div className="col-start-2 flex justify-end ">
+            <Button
+              type="submit"
+              className="bg-teal-400 hover:bg-teal-500 dark:hover:bg-teal-600"
+            >
+              Edit socials
+            </Button>
           </div>
-        </div>
-        <div className="col-start-2 flex justify-end ">
-          <Button
-            type="submit"
-            className="bg-teal-400 hover:bg-teal-500 dark:hover:bg-teal-600"
-          >
-            Add socials
-          </Button>
-        </div>
-      </form>
+        </form>
+      </ScrollArea>
     </div>
   );
 };
