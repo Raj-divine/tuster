@@ -9,7 +9,6 @@ import { getUserData } from "../../utilities";
 const NavLink = ({ children, href, exact, ...props }) => {
   const { pathname } = useRouter();
   const isActive = pathname === href;
-
   return (
     <Link href={href}>
       <a
@@ -29,6 +28,7 @@ const NavLink = ({ children, href, exact, ...props }) => {
 const AppNavbar = () => {
   const { colorScheme } = useMantineColorScheme();
   const { isOpen } = useSelector((state) => state.navbar);
+
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -38,12 +38,6 @@ const AppNavbar = () => {
     };
     getUser();
   }, []);
-
-  useEffect(() => {
-    console.log("changed");
-  }, [user]);
-
-  console.log(user);
 
   return (
     <Navbar
@@ -69,31 +63,33 @@ const AppNavbar = () => {
           </li>
         </ul>
       </Navbar.Section>
-      {/* <Navbar.Section className="mb-16 border-t border-t-gray-300 dark:border-t-dark-300">
-        <Link href={`/${user.uid}`}>
-          <div className="flex mt-3 h-16 w-full items-center p-2 rounded-lg justify-between dark:hover:bg-dark-800 hover:bg-gray-100 cursor-pointer">
-            <div>
-              <Avatar
-                classNames={{
-                  placeholder: "bg-teal-500 text-white",
-                }}
-                radius="xl"
-              >
-                {user.firstName[0].toUpperCase()}
-              </Avatar>
+      {user && (
+        <Navbar.Section className="mb-16 border-t border-t-gray-300 dark:border-t-dark-300">
+          <Link href={`/profile/${user.uid}`}>
+            <div className="flex mt-3 h-16 w-full items-center p-2 rounded-lg justify-between dark:hover:bg-dark-800 hover:bg-gray-100 cursor-pointer">
+              <div>
+                <Avatar
+                  classNames={{
+                    placeholder: "bg-teal-500 text-white",
+                  }}
+                  radius="xl"
+                >
+                  {user.firstName[0].toUpperCase()}
+                </Avatar>
+              </div>
+              <div className="ml-4 w-3/4">
+                <Text className="text-sm truncate w-4/5">
+                  {user.firstName} {user.lastName}
+                </Text>
+                <Text className="text-xs truncate w-4/5">{user.email}</Text>
+              </div>
+              <div>
+                <IoIosArrowForward />
+              </div>
             </div>
-            <div className="ml-4 w-3/4">
-              <Text className="text-sm truncate w-4/5">
-                {user.firstName} {user.lastName}
-              </Text>
-              <Text className="text-xs truncate w-4/5">{user.email}</Text>
-            </div>
-            <div>
-              <IoIosArrowForward />
-            </div>
-          </div>
-        </Link>
-      </Navbar.Section> */}
+          </Link>
+        </Navbar.Section>
+      )}
     </Navbar>
   );
 };

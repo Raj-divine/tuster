@@ -6,7 +6,8 @@ const getUserData = async () => {
 
   const userRef = doc(db, "users", currentUser.uid);
 
-  return getDoc(userRef);
+  const user = await getDoc(userRef);
+  return { ...user.data(), uid: currentUser.uid };
 };
 
 export default getUserData;

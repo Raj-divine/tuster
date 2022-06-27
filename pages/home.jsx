@@ -9,7 +9,6 @@ import HomePageHeader from "../components/HomePage/HomePageHeader/HomePageHeader
 import AppLoader from "../components/AppLoader/AppLoader";
 import HomePageInterestSection from "../components/HomePage/HomePageInterestSection/HomePageInterestSection";
 import HomePageNewSubSection from "../components/HomePage/HomePageNewSubSection/HomePageNewSubSection";
-
 const Home = () => {
   const { colorScheme } = useMantineColorScheme();
   const [userLoggedIn, setUserLoggedIn] = useState(false);
