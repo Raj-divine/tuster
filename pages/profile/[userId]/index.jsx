@@ -12,6 +12,7 @@ import ProfilePageMainProfile from "../../../components/ProfilePage/ProfilePageM
 import ProfilePageSocial from "../../../components/ProfilePage/ProfilePageSocial/ProfilePageSocial";
 import ProfilePageEditSocial from "../../../components/ProfilePage/ProfilePageEditSocial/ProfilePageEditSocial";
 import ProfilePageEditSection from "../../../components/ProfilePage/ProfilePageEditSection/ProfilePageEditSection";
+import ProfilePagePasswordReset from "../../../components/ProfilePage/ProfilePagePasswordReset/ProfilePagePasswordResetPage";
 
 const ProfilePage = () => {
   const { colorScheme } = useMantineColorScheme();
@@ -53,6 +54,7 @@ const ProfilePage = () => {
             <ProfilePageSocial />
             <ProfilePageEditSocial />
             <ProfilePageEditSection />
+            <ProfilePagePasswordReset />
           </div>
         </AppShell>
       )}
