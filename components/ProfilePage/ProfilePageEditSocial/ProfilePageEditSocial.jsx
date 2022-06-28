@@ -31,7 +31,7 @@ const ProfilePageEditSocial = () => {
   };
 
   return (
-    <div className="lg:col-span-1 lg:row-span-1 xl:col-span-1 xl:row-span-1 xl:col-start-2 2xl:col-span-2 2xl:row-span-1 p-8 rounded-lg border dark:border-dark-400">
+    <div className="lg:col-span-1 lg:row-span-1 xl:col-span-1 xl:row-span-1 xl:col-start-2 2xl:col-span-2 2xl:row-span-1 p-8 rounded-lg shadow-xl border dark:border-dark-400">
       <ScrollArea style={{ height: 250 }} type="scroll">
         <Text color="dimmed" className="text-lg mb-2">
           Add/Edit your socials

@@ -4,7 +4,7 @@ import { useLocalStorage } from "@mantine/hooks";
 const ProfilePageMainProfile = () => {
   const [user] = useLocalStorage({ key: "user-data" });
   return (
-    <div className="lg:col-span-1 lg:row-span-2 min-h-[600px] xl:col-span-1 xl:row-span-2 2xl:col-span-1 2xl:row-span-2 mt-10 border rounded-lg dark:border-dark-400">
+    <div className="lg:col-span-1 lg:row-span-2 min-h-[600px] xl:col-span-1 xl:row-span-2 2xl:col-span-1 2xl:row-span-2 mt-10 rounded-lg shadow-xl border dark:border-dark-400">
       <div className="flex h-full flex-col items-center justify-between">
         <div className="flex w-full flex-col items-center">
           <div className="mt-8">

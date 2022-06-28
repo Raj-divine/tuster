@@ -28,7 +28,7 @@ const ProfilePageSocial = () => {
   const { instagram, linkedin, twitter, facebook } = user.socials;
 
   return (
-    <div className="lg:col-span-1 lg:row-span-1 xl:col-span-1 xl:row-span-1 2xl:col-span-2 2xl:row-span-1 p-8  xl:mt-10 rounded-lg border dark:border-dark-400">
+    <div className="lg:col-span-1 lg:row-span-1 xl:col-span-1 xl:row-span-1 2xl:col-span-2 2xl:row-span-1 p-8  xl:mt-10 rounded-lg shadow-xl border dark:border-dark-400">
       <div className="flex flex-col justify-between">
         <SocialTableRow platform={<AiFillInstagram />}>
           {instagram ? instagram : "Not provided"}
