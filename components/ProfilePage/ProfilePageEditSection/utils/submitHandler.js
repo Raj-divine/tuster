@@ -1,5 +1,6 @@
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../../firebase/firebaseConfig";
+import { getAuth, updateEmail } from "firebase/auth";
 import { showNotification } from "@mantine/notifications";
 const submitHandler = async (
   setErrors,
@@ -33,10 +34,13 @@ const submitHandler = async (
 
   if (!errors.email && !errors.address && !errors.phone && !errors.subjects) {
     try {
+      const auth = getAuth();
       const newUserData = {
         ...formData,
         subjects,
       };
+      await updateEmail(auth.currentUser, formData.email);
+
       const userRef = doc(db, "users", user.uid);
       await setDoc(userRef, newUserData, { merge: true });
       setUser((prevState) => {

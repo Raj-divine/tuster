@@ -32,7 +32,7 @@ const ProfilePageEditSection = () => {
   const [errors, setErrors] = useState(initialErrorState);
 
   return (
-    <div className="lg:col-span-1 xl:row-span-1 xl:col-span-1 2xl:col-span-2 rounded-lg p-8 shadow-xl border dark:border-dark-400">
+    <div className="lg:col-span-1 xl:row-span-1 xl:col-span-1 2xl:col-span-2 rounded-lg p-8 pb-4 shadow-xl border dark:border-dark-400">
       <ScrollArea style={{ height: 250 }} type="scroll">
         <Text color="dimmed" className="text-lg mb-2">
           Edit Profile
@@ -122,12 +122,12 @@ const ProfilePageEditSection = () => {
               />
             </div>
           </div>
-          <div className="sm:mt-2">
+          <div className="sm:mt-2 sm:mb-4">
             <Button
               type="submit"
               className="bg-teal-400 hover:bg-teal-500 dark:hover:bg-teal-600"
             >
-              Edit socials
+              Edit Profile
             </Button>
           </div>
         </form>

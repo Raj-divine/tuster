@@ -73,7 +73,7 @@ const ProfilePagePasswordReset = () => {
                 }
               />
             </div>
-            <div className="mt-6 flex justify-end">
+            <div className="mt-6 sm:mb-4 flex justify-end">
               <Button
                 type="submit"
                 className="bg-teal-400 hover:bg-teal-500 dark:hover:bg-teal-600"
