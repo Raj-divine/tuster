@@ -10,6 +10,7 @@ import {
 import { useLocalStorage } from "@mantine/hooks";
 import { useState } from "react";
 import { ALL_SUBJECTS_DATA } from "../../../FakeData";
+import submitHandler from "./utils/submitHandler";
 
 const ProfilePageEditSection = () => {
   const [user, setUser] = useLocalStorage({ key: "user-data" });
@@ -36,8 +37,21 @@ const ProfilePageEditSection = () => {
         <Text color="dimmed" className="text-lg mb-2">
           Edit Profile
         </Text>
-        <form>
-          <div className="flex flex-col sm:flex-row">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            submitHandler(
+              setErrors,
+              subjects,
+              formData,
+              setUser,
+              errors,
+              initialErrorState,
+              user
+            );
+          }}
+        >
+          <div className="flex flex-col w-11/12 sm:flex-row">
             <div className="mb-6 sm:w-1/2">
               <TextInput
                 value={formData.email}
@@ -72,7 +86,7 @@ const ProfilePageEditSection = () => {
             </div>
           </div>
 
-          <div className="flex flex-col 2xl:flex-row">
+          <div className="flex flex-col w-11/12 2xl:flex-row">
             <div className="mb-6 2xl:w-1/2">
               <NumberInput
                 hideControls
@@ -108,7 +122,7 @@ const ProfilePageEditSection = () => {
               />
             </div>
           </div>
-          <div className="sm:mt-6 2xl:-translate-y-14 inline-block">
+          <div className="sm:mt-2">
             <Button
               type="submit"
               className="bg-teal-400 hover:bg-teal-500 dark:hover:bg-teal-600"
