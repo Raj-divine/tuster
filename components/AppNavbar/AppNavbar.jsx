@@ -65,7 +65,7 @@ const AppNavbar = () => {
       </Navbar.Section>
       {user && (
         <Navbar.Section className="mb-16 border-t border-t-gray-300 dark:border-t-dark-300">
-          <Link href={`/profile/${user.uid}`}>
+          <Link href="/profile">
             <div className="flex mt-3 h-16 w-full items-center p-2 rounded-lg justify-between dark:hover:bg-dark-800 hover:bg-gray-100 cursor-pointer">
               <div>
                 <Avatar

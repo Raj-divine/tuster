@@ -3,16 +3,16 @@ import { useLocalStorage } from "@mantine/hooks";
 import { getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import AppNavbar from "../../../components/AppNavbar/AppNavbar";
-import AppHeader from "../../../components/AppHeader/AppHeader";
-import AppLoader from "../../../components/AppLoader/AppLoader";
+import AppNavbar from "../../components/AppNavbar/AppNavbar";
+import AppHeader from "../../components/AppHeader/AppHeader";
+import AppLoader from "../../components/AppLoader/AppLoader";
 import { onAuthStateChanged } from "firebase/auth";
 import Head from "next/head";
-import ProfilePageMainProfile from "../../../components/ProfilePage/ProfilePageMainProfile/ProfilePageMainProfile";
-import ProfilePageSocial from "../../../components/ProfilePage/ProfilePageSocial/ProfilePageSocial";
-import ProfilePageEditSocial from "../../../components/ProfilePage/ProfilePageEditSocial/ProfilePageEditSocial";
-import ProfilePageEditSection from "../../../components/ProfilePage/ProfilePageEditSection/ProfilePageEditSection";
-import ProfilePagePasswordReset from "../../../components/ProfilePage/ProfilePagePasswordReset/ProfilePagePasswordResetPage";
+import ProfilePageMainProfile from "../../components/ProfilePage/ProfilePageMainProfile/ProfilePageMainProfile";
+import ProfilePageSocial from "../../components/ProfilePage/ProfilePageSocial/ProfilePageSocial";
+import ProfilePageEditSocial from "../../components/ProfilePage/ProfilePageEditSocial/ProfilePageEditSocial";
+import ProfilePageEditSection from "../../components/ProfilePage/ProfilePageEditSection/ProfilePageEditSection";
+import ProfilePagePasswordReset from "../../components/ProfilePage/ProfilePagePasswordReset/ProfilePagePasswordResetPage";
 
 const ProfilePage = () => {
   const { colorScheme } = useMantineColorScheme();
@@ -35,7 +35,7 @@ const ProfilePage = () => {
     <>
       <Head>
         <title>
-          {user.firstName} {user.lastName} | Profile
+          {user.firstName} {user.lastName}
         </title>
       </Head>
       {userLoggedIn && (

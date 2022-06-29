@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Text, Button, Space, Badge, SimpleGrid } from "@mantine/core";
 import { FaUserGraduate, FaStar, FaDollarSign } from "react-icons/fa";
 const Detail = ({ icon, text }) => {
@@ -22,6 +23,7 @@ const HomePageTutor = ({ tutor }) => {
     totalStudents,
     rating,
     pricing,
+    uid,
   } = tutor;
   return (
     <div className="flex flex-col md:flex-row  md:h-64 lg:h-72 xl:h-60 mb-10 overflow-hidden rounded-lg dark:shadow-md shadow bg-slate-50 dark:bg-dark-600">
@@ -72,12 +74,15 @@ const HomePageTutor = ({ tutor }) => {
             </SimpleGrid>
           </div>
           <div className="flex justify-between sm:justify-end w-full sm:w-1/2 mt-8">
-            <Button
-              className="text-teal-400 hover:bg-teal-50 dark:text-white dark:hover:bg-dark-500"
-              variant="subtle"
-            >
-              View more
-            </Button>
+            <Link href={`/tutor/${uid}`}>
+              <Button
+                className="text-teal-400 hover:bg-teal-50 dark:text-white dark:hover:bg-dark-500"
+                variant="subtle"
+                component="a"
+              >
+                View more
+              </Button>
+            </Link>
             <Space w={10} />
             <Button className="bg-teal-400 hover:bg-teal-500 dark:bg-teal-500 dark:hover:bg-teal-600">
               Book now
