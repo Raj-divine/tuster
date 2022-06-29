@@ -8,6 +8,7 @@ import AppLoader from "../../../components/AppLoader/AppLoader";
 import { useEffect, useState } from "react";
 import AppHeader from "../../../components/AppHeader/AppHeader";
 import AppNavbar from "../../../components/AppNavbar/AppNavbar";
+import TutorProfileMainSection from "../../../components/TutorProfilePage/TutorProfileMainSection/TutorProfileMainSection";
 const TutorProfilePage = ({ tutor }) => {
   const router = useRouter();
   const { colorScheme } = useMantineColorScheme();
@@ -47,7 +48,7 @@ const TutorProfilePage = ({ tutor }) => {
           navbar={<AppNavbar />}
         >
           <div className={colorScheme === "dark" ? "dark" : ""}>
-            <div>{tutor.firstName}</div>
+            <TutorProfileMainSection tutor={tutor} />
           </div>
         </AppShell>
       )}
