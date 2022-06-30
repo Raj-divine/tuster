@@ -16,7 +16,7 @@ const Detail = ({ icon, text }) => {
 const HomePageTutor = ({ tutor }) => {
   const {
     image,
-    firstName,
+    firsName: firstName, //made a typo in the db field
     lastName,
     description,
     expertise,

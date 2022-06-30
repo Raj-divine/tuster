@@ -37,7 +37,7 @@ const TutorProfilePage = ({ tutor }) => {
   return (
     <>
       <Head>
-        <title>{`${tutor.firstName} ${tutor.lastName}`}</title>
+        <title>{`${tutor.firsName} ${tutor.lastName}`}</title>
       </Head>
       {userLoggedIn && (
         <AppShell
@@ -58,7 +58,7 @@ const TutorProfilePage = ({ tutor }) => {
 
 export async function getStaticPaths() {
   return {
-    paths: [{ params: { tutorId: "rA1WAwvtmF6c04NRZa8p" } }],
+    paths: [{ params: { tutorId: "H61y8XTR8rtB3aM68bgx" } }],
     fallback: true,
   };
 }

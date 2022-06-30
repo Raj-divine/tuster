@@ -1,8 +1,16 @@
 import Image from "next/image";
 import { Button, Center, Space, Text } from "@mantine/core";
 import StarRating from "../../StarRating/StarRating";
+import { BsBookmark } from "react-icons/bs";
 const TutorProfileMainSection = ({ tutor }) => {
-  const { firstName, lastName, totalStudents, rating, pricing, image } = tutor;
+  const {
+    firsName: firstName,
+    lastName,
+    totalStudents,
+    rating,
+    pricing,
+    image,
+  } = tutor;
 
   return (
     <div className="grid w-3/4 mt-10 mx-auto grid-cols-4">
@@ -49,7 +57,11 @@ const TutorProfileMainSection = ({ tutor }) => {
           </div>
         </div>
       </div>
-      <div className="col-span-1">section 3</div>
+      <div className="col-span-1">
+        <div className="flex cursor-pointer h-full items-center justify-center">
+          <BsBookmark size={30} />
+        </div>
+      </div>
     </div>
   );
 };
