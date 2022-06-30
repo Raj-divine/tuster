@@ -28,7 +28,7 @@ const HomePageInterestSection = () => {
 
     const q = query(
       tutorRef,
-      where("experties", "array-contains-any", user.subjects),
+      where("expertise", "array-contains-any", user.subjects),
       orderBy("rating", "desc"),
       limit(10),
       startAfter(latestDoc)

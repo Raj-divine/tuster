@@ -34,7 +34,6 @@ const TutorProfilePage = ({ tutor }) => {
   if (router.isFallback) {
     return <AppLoader />;
   }
-
   return (
     <>
       <Head>

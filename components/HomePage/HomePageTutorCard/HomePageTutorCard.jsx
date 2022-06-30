@@ -19,7 +19,7 @@ const HomePageTutor = ({ tutor }) => {
     firstName,
     lastName,
     description,
-    experties,
+    expertise,
     totalStudents,
     rating,
     pricing,
@@ -61,7 +61,7 @@ const HomePageTutor = ({ tutor }) => {
                 { minWidth: 1280, cols: 3 },
               ]}
             >
-              {experties.map((expertise, index) => {
+              {expertise.map((expertise, index) => {
                 return (
                   <Badge
                     key={index}
