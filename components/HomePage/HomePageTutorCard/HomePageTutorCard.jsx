@@ -65,7 +65,7 @@ const HomePageTutor = ({ tutor }) => {
                 return (
                   <Badge
                     key={index}
-                    className="w-full text-teal-500 bg-teal-100 dark:bg-teal-700 dark:text-teal-200"
+                    className="w-full text-teal-500 bg-teal-100 dark:bg-teal-900 dark:text-teal-200"
                   >
                     {expertise}
                   </Badge>
