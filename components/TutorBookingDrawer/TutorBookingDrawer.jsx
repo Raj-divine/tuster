@@ -27,7 +27,7 @@ const TutorBookingDrawer = () => {
 
   const [time, setTime] = useState([timeStart, timeEnd]);
 
-  const timeDifference = dayjs(time[1]).diff(dayjs(time[0]), "hours");
+  const timeDifference = dayjs(time[1]).diff(dayjs(time[0]), "minutes");
   const dateDifference = dayjs(date[1]).diff(dayjs(date[0]), "days");
 
   const onCloseHandler = () => {
@@ -43,6 +43,8 @@ const TutorBookingDrawer = () => {
     getTutor();
   }, [isOpen]);
 
+  let totalPrice =
+    tutor.pricing * (Math.ceil(timeDifference / 60) * (dateDifference + 1));
   return (
     <>
       <Drawer
@@ -108,7 +110,7 @@ const TutorBookingDrawer = () => {
               </Text>
 
               <Text component="span" className="font-semibold">
-                ${tutor.pricing * (timeDifference * (dateDifference + 1))}
+                {totalPrice >= 0 ? `$${totalPrice}` : "$0"}
               </Text>
             </div>
             <Button
