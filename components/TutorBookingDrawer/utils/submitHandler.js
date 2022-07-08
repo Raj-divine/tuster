@@ -1,5 +1,18 @@
-import dayjs from "dayjs";
-const submitHandler = ({ errors, setErrors, location, timeDifference }) => {
+import { doc, setDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { db } from "../../../firebase/firebaseConfig";
+const submitHandler = async ({
+  errors,
+  setErrors,
+  time,
+  date,
+  tutorId,
+  location,
+  timeDifference,
+  user,
+  setUser,
+  totalPrice,
+}) => {
   if (location.trim() === "") {
     setErrors({ location: "Please enter a location" });
   } else if (location.length < 5) {
@@ -11,6 +24,32 @@ const submitHandler = ({ errors, setErrors, location, timeDifference }) => {
       time: "",
       location: "",
     });
+  }
+
+  if (!errors.time && !errors.location) {
+    try {
+      const { currentUser } = getAuth();
+      await setDoc(
+        doc(db, "users", currentUser.uid),
+        {
+          bookings: [
+            ...user.bookings,
+            { tutor: tutorId, time, date, where: location, totalPrice },
+          ],
+        },
+        { merge: true }
+      );
+
+      setUser((prevUser) => ({
+        ...prevUser,
+        bookings: [
+          ...prevUser.bookings,
+          { tutor: tutorId, time, date, where: location, totalPrice },
+        ],
+      }));
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 

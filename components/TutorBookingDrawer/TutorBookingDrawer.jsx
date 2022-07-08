@@ -12,7 +12,7 @@ const TutorBookingDrawer = () => {
   const [user, setUser] = useLocalStorage({ key: "user-data" });
   const [errors, setErrors] = useState({ time: "", location: "" });
   const [tutor, setTutor] = useState({});
-  const { isOpen, uid } = useSelector((state) => state.drawer);
+  const { isOpen, uid: tutorId } = useSelector((state) => state.drawer);
   const dispatch = useDispatch();
 
   const [date, setDate] = useState([
@@ -35,7 +35,7 @@ const TutorBookingDrawer = () => {
   };
   useEffect(() => {
     const getTutor = async () => {
-      const tutorSnap = await getDoc(doc(db, "tutors", uid));
+      const tutorSnap = await getDoc(doc(db, "tutors", tutorId));
       if (tutorSnap.exists()) {
         setTutor(tutorSnap.data());
       }
@@ -64,10 +64,14 @@ const TutorBookingDrawer = () => {
             submitHandler({
               errors,
               setErrors,
-              date,
-              time,
               location,
               timeDifference,
+              time,
+              date,
+              tutorId,
+              user,
+              setUser,
+              totalPrice,
             });
           }}
           className="m-6"
