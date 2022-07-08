@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useLocalStorage } from "@mantine/hooks";
 import { useRef } from "react";
 import { Text, Button, Space, Badge, SimpleGrid } from "@mantine/core";
 import { FaUserGraduate, FaStar, FaDollarSign } from "react-icons/fa";
@@ -18,6 +19,7 @@ const Detail = ({ icon, text }) => {
 
 const HomePageTutor = ({ tutor }) => {
   const dispatch = useDispatch();
+  const [user] = useLocalStorage({ key: "user-data" });
 
   const {
     image,
