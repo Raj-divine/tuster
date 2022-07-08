@@ -30,24 +30,26 @@ const Home = () => {
         <title>Home | Tuster</title>
       </Head>
       {userLoggedIn && (
-        <AppShell
-          padding={0}
-          navbarOffsetBreakpoint="md"
-          fixed
-          header={<AppHeader />}
-          navbar={<AppNavbar />}
-        >
-          <div
-            className={
-              colorScheme === "dark" ? "dark w-full h-full" : "w-full h-full"
-            }
+        <>
+          <AppShell
+            padding={0}
+            navbarOffsetBreakpoint="md"
+            fixed
+            header={<AppHeader />}
+            navbar={<AppNavbar />}
           >
-            <HomePageHeader />
-            <Divider my="sm" className="p-0 m-0" />
-            <HomePageInterestSection />
-            <HomePageNewSubSection />
-          </div>
-        </AppShell>
+            <div
+              className={
+                colorScheme === "dark" ? "dark w-full h-full" : "w-full h-full"
+              }
+            >
+              <HomePageHeader />
+              <Divider my="sm" className="p-0 m-0" />
+              <HomePageInterestSection />
+              <HomePageNewSubSection />
+            </div>
+          </AppShell>
+        </>
       )}
       {!userLoggedIn && <AppLoader />}
     </>

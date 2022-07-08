@@ -33,6 +33,7 @@ const TutorProfileMainSection = ({ tutor }) => {
             <Button
               className="ml-4 px-2 py-1 text-teal-400 text-xs border-teal-400"
               variant="outline"
+              component="a"
               size="xs"
             >
               Book now

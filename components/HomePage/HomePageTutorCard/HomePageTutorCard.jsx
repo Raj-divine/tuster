@@ -1,7 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
 import { Text, Button, Space, Badge, SimpleGrid } from "@mantine/core";
 import { FaUserGraduate, FaStar, FaDollarSign } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { openDrawer } from "../../../context/drawerSlice";
 const Detail = ({ icon, text }) => {
   return (
     <div className="w-16 flex justify-between items-center">
@@ -14,6 +17,8 @@ const Detail = ({ icon, text }) => {
 };
 
 const HomePageTutor = ({ tutor }) => {
+  const dispatch = useDispatch();
+
   const {
     image,
     firsName: firstName, //made a typo in the db field
@@ -25,6 +30,9 @@ const HomePageTutor = ({ tutor }) => {
     pricing,
     uid,
   } = tutor;
+
+  const buttonRef = useRef();
+
   return (
     <div className="flex flex-col md:flex-row  md:h-64 lg:h-72 xl:h-60 mb-10 overflow-hidden rounded-lg dark:shadow-md shadow bg-slate-50 dark:bg-dark-600">
       <div className="md:w-1/4 h-60 sm:h-[500px] md:h-full relative">
@@ -84,7 +92,15 @@ const HomePageTutor = ({ tutor }) => {
               </Button>
             </Link>
             <Space w={10} />
-            <Button className="bg-teal-400 hover:bg-teal-500 dark:bg-teal-500 dark:hover:bg-teal-600">
+            <Button
+              className="bg-teal-400 hover:bg-teal-500 dark:bg-teal-500 dark:hover:bg-teal-600"
+              component="a"
+              ref={buttonRef}
+              data-uid={uid}
+              onClick={() => {
+                dispatch(openDrawer({ uid: buttonRef.current.dataset.uid }));
+              }}
+            >
               Book now
             </Button>
           </div>
