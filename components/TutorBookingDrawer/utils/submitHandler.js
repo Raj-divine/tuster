@@ -28,6 +28,15 @@ const submitHandler = async ({
   }
 
   let alreadyBooked = false;
+  if (user.bookings.length === 5) {
+    showNotification({
+      autoClose: 3000,
+      color: "red",
+      title: "limit exceeded",
+      message: "You can not book more than 5 tutors",
+    });
+    return;
+  }
 
   user.bookings.forEach((item) => {
     if (item.tutor === tutorId) {
