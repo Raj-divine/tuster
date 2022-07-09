@@ -1,6 +1,7 @@
 import { doc, setDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { db } from "../../../firebase/firebaseConfig";
+import { showNotification } from "@mantine/notifications";
 const submitHandler = async ({
   errors,
   setErrors,
@@ -26,7 +27,22 @@ const submitHandler = async ({
     });
   }
 
-  if (!errors.time && !errors.location) {
+  let alreadyBooked = false;
+
+  user.bookings.forEach((item) => {
+    if (item.tutor === tutorId) {
+      showNotification({
+        autoClose: 3000,
+        color: "red",
+        title: "Already booked",
+        message: "You have already booked a class from this tutor",
+      });
+      alreadyBooked = true;
+      return;
+    }
+  });
+
+  if (!errors.time && !errors.location && !alreadyBooked) {
     try {
       const { currentUser } = getAuth();
       await setDoc(

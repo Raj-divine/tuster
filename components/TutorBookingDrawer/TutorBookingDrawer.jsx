@@ -73,6 +73,7 @@ const TutorBookingDrawer = () => {
               setUser,
               totalPrice,
             });
+            onCloseHandler();
           }}
           className="m-6"
         >
@@ -96,6 +97,7 @@ const TutorBookingDrawer = () => {
               value={date}
               onChange={setDate}
               required
+              clearable={false}
             />
           </div>
           <div className="mt-4">
