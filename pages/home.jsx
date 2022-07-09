@@ -9,6 +9,7 @@ import HomePageHeader from "../components/HomePage/HomePageHeader/HomePageHeader
 import AppLoader from "../components/AppLoader/AppLoader";
 import HomePageInterestSection from "../components/HomePage/HomePageInterestSection/HomePageInterestSection";
 import HomePageNewSubSection from "../components/HomePage/HomePageNewSubSection/HomePageNewSubSection";
+import HomePageBookedSection from "../components/HomePage/HomePageBookedSection/HomePageBookedSection";
 const Home = () => {
   const { colorScheme } = useMantineColorScheme();
   const [userLoggedIn, setUserLoggedIn] = useState(false);
@@ -45,6 +46,7 @@ const Home = () => {
             >
               <HomePageHeader />
               <Divider my="sm" className="p-0 m-0" />
+              <HomePageBookedSection />
               <HomePageInterestSection />
               <HomePageNewSubSection />
             </div>

@@ -51,7 +51,7 @@ const HomePageInterestSection = () => {
   }, []);
 
   return (
-    <section className="px-4 sm:px-10 pt-10 justify-between">
+    <section className="px-4 sm:px-10 pt-10">
       <h3 className="font-merriweather italic text-xl xs:text-2xl sm:text-4xl ">
         Based on your interests, {userData.firstName}
       </h3>

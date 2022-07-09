@@ -63,6 +63,12 @@ const submitHandler = async ({
           { tutor: tutorId, time, date, where: location, totalPrice },
         ],
       }));
+      showNotification({
+        autoClose: 3000,
+        color: "teal",
+        title: "Hurray!",
+        message: "Booked successfully",
+      });
     } catch (error) {
       console.log(error);
     }
