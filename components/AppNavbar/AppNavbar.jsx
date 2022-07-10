@@ -2,7 +2,8 @@ import { Navbar, useMantineColorScheme, Avatar, Text } from "@mantine/core";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import Link from "next/link";
-import { AiOutlineHome, AiOutlineContacts } from "react-icons/ai";
+import { AiOutlineHome } from "react-icons/ai";
+import { FaChalkboardTeacher } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { getUserData } from "../../utilities";
@@ -56,9 +57,9 @@ const AppNavbar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink href="/contact">
-              <AiOutlineContacts className="text-2xl mr-4" />
-              Contact
+            <NavLink href="/booked-tutors">
+              <FaChalkboardTeacher className="text-2xl mr-4" />
+              Booked Tutors
             </NavLink>
           </li>
         </ul>

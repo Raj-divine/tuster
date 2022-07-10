@@ -59,8 +59,10 @@ const TutorProfileMainSection = ({ tutor }) => {
         </div>
       </div>
       <div className="col-span-1">
-        <div className="flex cursor-pointer h-full items-center justify-center">
-          <BsBookmark size={30} />
+        <div className="flex h-full items-center justify-center">
+          <div className="cursor-pointer">
+            <BsBookmark size={30} />
+          </div>
         </div>
       </div>
     </div>
