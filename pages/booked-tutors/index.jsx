@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import BookedTutorsPageHeader from "../../components/BookedTutorsPage/BookedTutorsPageHeader/BookedTutorsPageHeader";
+import BookedTutorsPageMainSection from "../../components/BookedTutorsPage/BookedTutorsPageMainSection/BookedTutorsPageMainSection";
 const BookedTutorPage = () => {
   const { colorScheme } = useMantineColorScheme();
   const [userLoggedIn, setUserLoggedIn] = useState(false);
@@ -44,6 +45,7 @@ const BookedTutorPage = () => {
             >
               <BookedTutorsPageHeader />
               <Divider my="sm" className="p-0 m-0" />
+              <BookedTutorsPageMainSection />
             </div>
           </AppShell>
         </>

@@ -28,7 +28,7 @@ const submitHandler = async ({
   }
 
   let alreadyBooked = false;
-  if (user.bookings.length === 5) {
+  if (user.bookings.length === 10) {
     showNotification({
       autoClose: 3000,
       color: "red",
