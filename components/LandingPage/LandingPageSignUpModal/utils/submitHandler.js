@@ -48,6 +48,7 @@ const submitHandler = async ({
           phone: formData.phone,
           socials: {},
           bookings: [],
+          bookmarks: [],
         };
 
         await setDoc(doc(db, "users", user.uid), userDoc);

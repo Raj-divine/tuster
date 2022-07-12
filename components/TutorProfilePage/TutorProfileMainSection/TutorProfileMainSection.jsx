@@ -1,10 +1,15 @@
 import Image from "next/image";
 import { Button, Center, Space, Text } from "@mantine/core";
 import StarRating from "../../StarRating/StarRating";
-import { useSelector, useDispatch } from "react-redux";
-import { BsBookmark } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { useLocalStorage } from "@mantine/hooks";
+import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { openDrawer } from "../../../context/drawerSlice";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../../firebase/firebaseConfig";
 const TutorProfileMainSection = ({ tutor }) => {
+  const [user, setUser] = useLocalStorage({ key: "user-data" });
+
   const {
     firsName: firstName,
     lastName,
@@ -16,6 +21,49 @@ const TutorProfileMainSection = ({ tutor }) => {
   } = tutor;
 
   const dispatch = useDispatch();
+
+  const bookmarkHandler = async () => {
+    if (user.bookmarks.includes(uid)) {
+      await setDoc(
+        doc(db, "users", user.uid),
+        {
+          ...user,
+          bookmarks: user.bookmarks.filter((item) => item !== uid),
+        },
+        { merge: true }
+      );
+
+      setUser((prevUser) => {
+        return {
+          ...prevUser,
+          bookmarks: prevUser.bookmarks.filter((item) => item !== uid),
+        };
+      });
+    } else {
+      await setDoc(
+        doc(db, "users", user.uid),
+        {
+          ...user,
+          bookmarks: [...user.bookmarks, uid],
+        },
+        { merge: true }
+      );
+      setUser((prevUser) => {
+        return {
+          ...prevUser,
+          bookmarks: [...prevUser.bookmarks, uid],
+        };
+      });
+    }
+  };
+
+  let bookmarkIcon = <BsBookmark size={30} />;
+
+  user.bookmarks.forEach((bookmark) => {
+    if (bookmark === uid) {
+      bookmarkIcon = <BsFillBookmarkFill size={30} />;
+    }
+  });
 
   return (
     <div className="grid w-3/4 mt-10 mx-auto grid-cols-4">
@@ -68,8 +116,11 @@ const TutorProfileMainSection = ({ tutor }) => {
       </div>
       <div className="col-span-1">
         <div className="flex h-full items-center justify-center">
-          <div className="cursor-pointer">
-            <BsBookmark size={30} />
+          <div
+            className="cursor-pointer flex items-center justify-center rounded-full w-14 h-14 hover:bg-dark-800"
+            onClick={bookmarkHandler}
+          >
+            {bookmarkIcon}
           </div>
         </div>
       </div>
