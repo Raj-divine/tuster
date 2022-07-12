@@ -72,7 +72,7 @@ export async function getStaticProps(context) {
   const tutorSnap = await getDoc(tutorRef);
   return {
     props: {
-      tutor: tutorSnap.data(),
+      tutor: { ...tutorSnap.data(), uid: params.tutorId },
     },
     revalidate: 120,
   };

@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { Button, Center, Space, Text } from "@mantine/core";
 import StarRating from "../../StarRating/StarRating";
+import { useSelector, useDispatch } from "react-redux";
 import { BsBookmark } from "react-icons/bs";
+import { openDrawer } from "../../../context/drawerSlice";
 const TutorProfileMainSection = ({ tutor }) => {
   const {
     firsName: firstName,
@@ -10,7 +12,10 @@ const TutorProfileMainSection = ({ tutor }) => {
     rating,
     pricing,
     image,
+    uid,
   } = tutor;
+
+  const dispatch = useDispatch();
 
   return (
     <div className="grid w-3/4 mt-10 mx-auto grid-cols-4">
@@ -35,6 +40,9 @@ const TutorProfileMainSection = ({ tutor }) => {
               variant="outline"
               component="a"
               size="xs"
+              onClick={() => {
+                dispatch(openDrawer({ uid }));
+              }}
             >
               Book now
             </Button>
