@@ -66,9 +66,9 @@ const TutorProfileMainSection = ({ tutor }) => {
   });
 
   return (
-    <div className="grid w-3/4 mt-10 mx-auto grid-cols-4">
-      <div className="col-span-1">
-        <div className="relative w-1/2 my-0 mx-auto h-36 rounded-full overflow-hidden shadow-xl">
+    <div className="2xl:w-2/3 mt-10 mx-auto justify-around items-center flex flex-col xl:flex-row">
+      <div className="flex w-11/12 xl:w-fit">
+        <div className="relative w-36 my-0 mx-auto h-36 rounded-full overflow-hidden shadow-xl">
           <Image
             src={image}
             layout="fill"
@@ -76,9 +76,17 @@ const TutorProfileMainSection = ({ tutor }) => {
             alt={`${firstName} ${lastName}`}
           />
         </div>
+        <div className="xl:hidden">
+          <div
+            className="cursor-pointer flex items-center justify-center rounded-full w-14 h-14 hover:bg-dark-800"
+            onClick={bookmarkHandler}
+          >
+            {bookmarkIcon}
+          </div>
+        </div>
       </div>
-      <div className="col-span-2">
-        <div className="flex flex-col h-full justify-center">
+      <div className="">
+        <div className="flex flex-col mt-7 xl:mt-0 h-full items-center xl:items-stretch justify-center">
           <div className="flex items-center">
             <Text className="text-3xl font-light">
               {firstName} {lastName}
@@ -96,7 +104,7 @@ const TutorProfileMainSection = ({ tutor }) => {
             </Button>
           </div>
           <Space h={20} />
-          <div className="flex">
+          <div className="flex flex-col sm:flex-row">
             <Center>
               <Text className="mr-2 font-semibold">{totalStudents}</Text>
               <Text className="text-lg">Students taught</Text>
@@ -114,7 +122,7 @@ const TutorProfileMainSection = ({ tutor }) => {
           </div>
         </div>
       </div>
-      <div className="col-span-1">
+      <div className="hidden xl:block">
         <div className="flex h-full items-center justify-center">
           <div
             className="cursor-pointer flex items-center justify-center rounded-full w-14 h-14 hover:bg-dark-800"

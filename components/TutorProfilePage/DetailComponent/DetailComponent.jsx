@@ -2,7 +2,7 @@ import { Space, Text } from "@mantine/core";
 
 const Detail = ({ value, label }) => {
   return (
-    <div className="flex w-1/2 justify-between mt-6">
+    <div className="flex w-full sm:w-2/3 justify-between mt-6">
       <div>
         <Text className="font-semibold text-lg">{label}:</Text>
       </div>
