@@ -22,9 +22,17 @@ const BookedTutorsPageMainSection = () => {
   }, [user]);
 
   return (
-    <section className="my-10 mx-auto 2xl:w-3/4">
+    <section className="my-10 mx-auto w-11/12 sm:w-11/12 lg:w-4/5 xl:w-11/12 2xl:w-3/4">
       {user.bookings.length > 0 && (
-        <SimpleGrid cols={3}>
+        <SimpleGrid
+          cols={1}
+          breakpoints={[
+            { minWidth: 640, cols: 2 },
+            { minWidth: 768, cols: 2 },
+            { minWidth: 1024, cols: 2 },
+            { minWidth: 1280, cols: 3 },
+          ]}
+        >
           {tutors.map((tutor, i) => {
             if (user.bookings[i]) {
               return (
