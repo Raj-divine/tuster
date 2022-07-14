@@ -15,16 +15,7 @@ const ProfilePageEditSocial = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const { instagram, twitter, linkedin, facebook } = socials;
-    if (!instagram && !twitter && !linkedin && !facebook) {
-      showNotification({
-        autoClose: 3000,
-        title: "No data provided",
-        message: "Please provide at least one handle before submitting",
-        color: "red",
-      });
-      return;
-    }
+
     const userRef = doc(db, "users", user.uid);
     setDoc(userRef, { socials }, { merge: true });
     setUser((prevUser) => ({ ...prevUser, socials }));

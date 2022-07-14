@@ -28,7 +28,7 @@ const BookedTutorsPageCard = ({ tutor, date, time, totalPrice }) => {
   };
 
   return (
-    <Card shadow="sm" className="rounded-lg" p="lg">
+    <Card shadow="lg" className="rounded-lg" p="lg">
       <Card.Section className="h-72">
         <div className="relative h-full">
           <Image

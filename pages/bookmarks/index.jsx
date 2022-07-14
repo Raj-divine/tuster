@@ -1,14 +1,12 @@
-import Head from "next/head";
-import { AppShell, Divider, useMantineColorScheme } from "@mantine/core";
-import AppLoader from "../../components/AppLoader/AppLoader";
-import AppHeader from "../../components/AppHeader/AppHeader";
-import AppNavbar from "../../components/AppNavbar/AppNavbar";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useMantineColorScheme, AppShell } from "@mantine/core";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import BookedTutorsPageMainSection from "../../components/BookedTutorsPage/BookedTutorsPageMainSection/BookedTutorsPageMainSection";
-import BookedTutorsPageHeader from "../../components/BookedTutorsPage/BookedTutorsPageHeader/BookedTutorsPageHeader";
-const BookedTutorPage = () => {
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import AppHeader from "../../components/AppHeader/AppHeader";
+import AppLoader from "../../components/AppLoader/AppLoader";
+import AppNavbar from "../../components/AppNavbar/AppNavbar";
+import Head from "next/head";
+const BookmarkPage = () => {
   const { colorScheme } = useMantineColorScheme();
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const router = useRouter();
@@ -23,11 +21,10 @@ const BookedTutorPage = () => {
       }
     });
   }, [auth]);
-
   return (
     <>
       <Head>
-        <title>Home | Tuster</title>
+        <title>Bookmarks | Tuster</title>
       </Head>
       {userLoggedIn && (
         <>
@@ -42,11 +39,7 @@ const BookedTutorPage = () => {
               className={
                 colorScheme === "dark" ? "dark w-full h-full" : "w-full h-full"
               }
-            >
-              <BookedTutorsPageHeader />
-              <Divider my="sm" className="p-0 m-0" />
-              <BookedTutorsPageMainSection />
-            </div>
+            ></div>
           </AppShell>
         </>
       )}
@@ -55,4 +48,4 @@ const BookedTutorPage = () => {
   );
 };
 
-export default BookedTutorPage;
+export default BookmarkPage;

@@ -24,6 +24,13 @@ const TutorProfileMainSection = ({ tutor }) => {
 
   const bookmarkHandler = async () => {
     if (user.bookmarks.includes(uid)) {
+      setUser((prevUser) => {
+        return {
+          ...prevUser,
+          bookmarks: prevUser.bookmarks.filter((item) => item !== uid),
+        };
+      });
+
       await setDoc(
         doc(db, "users", user.uid),
         {
@@ -32,14 +39,14 @@ const TutorProfileMainSection = ({ tutor }) => {
         },
         { merge: true }
       );
-
+    } else {
       setUser((prevUser) => {
         return {
           ...prevUser,
-          bookmarks: prevUser.bookmarks.filter((item) => item !== uid),
+          bookmarks: [...prevUser.bookmarks, uid],
         };
       });
-    } else {
+
       await setDoc(
         doc(db, "users", user.uid),
         {
@@ -48,12 +55,6 @@ const TutorProfileMainSection = ({ tutor }) => {
         },
         { merge: true }
       );
-      setUser((prevUser) => {
-        return {
-          ...prevUser,
-          bookmarks: [...prevUser.bookmarks, uid],
-        };
-      });
     }
   };
 

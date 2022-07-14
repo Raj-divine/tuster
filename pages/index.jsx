@@ -29,7 +29,7 @@ export default function LandingPage() {
 
   useEffect(() => {
     signOut(auth)
-      .then((res) => {
+      .then(() => {
         setUser({});
         setUserLoggedIn(false);
       })

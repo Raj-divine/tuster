@@ -7,6 +7,7 @@ import { FaChalkboardTeacher } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { getUserData } from "../../utilities";
+import { BsBookmark } from "react-icons/bs";
 const NavLink = ({ children, href, exact, ...props }) => {
   const { pathname } = useRouter();
   const isActive = pathname === href;
@@ -60,6 +61,12 @@ const AppNavbar = () => {
             <NavLink href="/booked-tutors">
               <FaChalkboardTeacher className="text-2xl mr-4" />
               Booked Tutors
+            </NavLink>
+          </li>
+          <li>
+            <NavLink href="/bookmarks">
+              <BsBookmark className="text-2xl mr-4" />
+              bookmarks
             </NavLink>
           </li>
         </ul>
