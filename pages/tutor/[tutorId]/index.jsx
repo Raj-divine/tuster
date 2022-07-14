@@ -10,6 +10,7 @@ import AppHeader from "../../../components/AppHeader/AppHeader";
 import AppNavbar from "../../../components/AppNavbar/AppNavbar";
 import TutorProfileMainSection from "../../../components/TutorProfilePage/TutorProfileMainSection/TutorProfileMainSection";
 import TutorProfileDetailSection from "../../../components/TutorProfilePage/TutorProfileDetailSection/ProfileDetailSection";
+import TutorBookingDrawer from "../../../components/TutorBookingDrawer/TutorBookingDrawer";
 
 const TutorProfilePage = ({ tutor }) => {
   const router = useRouter();
@@ -51,6 +52,7 @@ const TutorProfilePage = ({ tutor }) => {
           <div className={colorScheme === "dark" ? "dark" : ""}>
             <TutorProfileMainSection tutor={tutor} />
             <TutorProfileDetailSection tutor={tutor} />
+            <TutorBookingDrawer />
           </div>
         </AppShell>
       )}

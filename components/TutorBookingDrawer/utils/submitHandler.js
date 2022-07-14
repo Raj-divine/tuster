@@ -1,5 +1,6 @@
 import { doc, setDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import dayjs from "dayjs";
 import { db } from "../../../firebase/firebaseConfig";
 import { showNotification } from "@mantine/notifications";
 const submitHandler = async ({
@@ -26,6 +27,8 @@ const submitHandler = async ({
       location: "",
     });
   }
+
+  console.log(dayjs(date[0]).toISOString());
 
   let alreadyBooked = false;
   if (user.bookings.length === 10) {
@@ -59,7 +62,19 @@ const submitHandler = async ({
         {
           bookings: [
             ...user.bookings,
-            { tutor: tutorId, time, date, where: location, totalPrice },
+            {
+              tutor: tutorId,
+              time: [
+                dayjs(time[0]).toISOString(),
+                dayjs(time[1]).toISOString(),
+              ],
+              date: [
+                dayjs(date[0]).toISOString(),
+                dayjs(date[1]).toISOString(),
+              ],
+              where: location,
+              totalPrice,
+            },
           ],
         },
         { merge: true }
@@ -69,7 +84,13 @@ const submitHandler = async ({
         ...prevUser,
         bookings: [
           ...prevUser.bookings,
-          { tutor: tutorId, time, date, where: location, totalPrice },
+          {
+            tutor: tutorId,
+            time: [dayjs(time[0]).toISOString(), dayjs(time[1]).toISOString()],
+            date: [dayjs(date[0]).toISOString(), dayjs(date[1]).toISOString()],
+            where: location,
+            totalPrice,
+          },
         ],
       }));
       showNotification({

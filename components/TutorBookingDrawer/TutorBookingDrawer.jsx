@@ -15,10 +15,12 @@ const TutorBookingDrawer = () => {
   const { isOpen, uid: tutorId } = useSelector((state) => state.drawer);
   const dispatch = useDispatch();
 
-  const [date, setDate] = useState([
+  const initialDate = [
     dayjs(new Date()).add(1, "day").toDate(),
     dayjs(new Date()).add(3, "days").toDate(),
-  ]);
+  ];
+
+  const [date, setDate] = useState(initialDate);
 
   const [location, setLocation] = useState(user.address);
 
@@ -32,6 +34,7 @@ const TutorBookingDrawer = () => {
 
   const onCloseHandler = () => {
     dispatch(closeDrawer());
+    setTutor({});
   };
   useEffect(() => {
     const getTutor = async () => {

@@ -9,6 +9,7 @@ import HomePageHeader from "../components/HomePage/HomePageHeader/HomePageHeader
 import AppLoader from "../components/AppLoader/AppLoader";
 import HomePageInterestSection from "../components/HomePage/HomePageInterestSection/HomePageInterestSection";
 import HomePageNewSubSection from "../components/HomePage/HomePageNewSubSection/HomePageNewSubSection";
+import TutorBookingDrawer from "../components/TutorBookingDrawer/TutorBookingDrawer";
 const Home = () => {
   const { colorScheme } = useMantineColorScheme();
   const [userLoggedIn, setUserLoggedIn] = useState(false);
@@ -47,6 +48,7 @@ const Home = () => {
               <Divider my="sm" className="p-0 m-0" />
               <HomePageInterestSection />
               <HomePageNewSubSection />
+              <TutorBookingDrawer />
             </div>
           </AppShell>
         </>

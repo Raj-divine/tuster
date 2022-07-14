@@ -6,7 +6,6 @@ import Head from "next/head";
 import { store } from "../context/store";
 import { Provider } from "react-redux";
 import { app } from "../firebase/firebaseConfig";
-import TutorBookingDrawer from "../components/TutorBookingDrawer/TutorBookingDrawer";
 function MyApp({ Component, pageProps }) {
   const [colorScheme, setColorScheme] = useLocalStorage({
     key: "mantine-color-scheme",
@@ -43,7 +42,6 @@ function MyApp({ Component, pageProps }) {
         >
           <NotificationsProvider>
             <Component {...pageProps} />
-            <TutorBookingDrawer />
           </NotificationsProvider>
         </MantineProvider>
       </ColorSchemeProvider>
