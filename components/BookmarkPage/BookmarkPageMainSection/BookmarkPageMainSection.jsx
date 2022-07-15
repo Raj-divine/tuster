@@ -3,6 +3,8 @@ import { useLocalStorage } from "@mantine/hooks";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 import BookmarkPageBookmark from "../BookmarkPageBookmark/BookmarkPageBookmark";
+import Image from "next/image";
+import noData from "../../../assets/imgs/no-data.png";
 const BookmarkPageMainSection = () => {
   const [user] = useLocalStorage({ key: "user-data" });
   const [tutors, setTutors] = useState([]);
@@ -40,8 +42,8 @@ const BookmarkPageMainSection = () => {
             );
           })}
         {user.bookmarks.length === 0 && (
-          <div className="w-full text-5xl font-raleway h-96 flex items-center justify-center">
-            No bookmarked tutors
+          <div className="w-1/2 my-0 mx-auto flex items-center justify-center">
+            <Image src={noData} />
           </div>
         )}
       </div>

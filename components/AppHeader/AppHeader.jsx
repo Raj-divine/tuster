@@ -27,11 +27,14 @@ const AppHeader = ({ hiddenBurger }) => {
     >
       <div className=" flex items-center px-4 sm:px-8 py-3 justify-between border-b border-b-gray-200 dark:border-b-dark-300">
         <Image src={logo} priority width={40} height={40} alt="logo" />
-        <Link href="/" passHref>
-          <Text component="a" className="font-dancingScript text-4xl font-bold">
-            Tuster
-          </Text>
-        </Link>
+
+        <Text
+          component="a"
+          className="font-dancingScript cursor-default text-4xl font-bold"
+        >
+          Tuster
+        </Text>
+
         <div className="flex">
           <div className=" mr-4">
             <a

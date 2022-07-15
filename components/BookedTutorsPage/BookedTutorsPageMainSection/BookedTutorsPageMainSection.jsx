@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import BookedTutorsPageCard from "../BookedTutorsPageCard/BookedTutorsPageCard";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
+import Image from "next/image";
+import noData from "../../../assets/imgs/no-data.png";
 const BookedTutorsPageMainSection = () => {
   const [user] = useLocalStorage({ key: "user-data" });
   const [tutors, setTutors] = useState([]);
@@ -57,8 +59,8 @@ const BookedTutorsPageMainSection = () => {
           </SimpleGrid>
         )}
         {user.bookings.length === 0 && (
-          <div className="w-full text-5xl font-raleway h-96 flex items-center justify-center">
-            No Tutors booked
+          <div className="w-1/2 my-0 mx-auto flex items-center justify-center">
+            <Image src={noData} />
           </div>
         )}
       </div>
