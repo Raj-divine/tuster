@@ -32,7 +32,7 @@ const BookedTutorsPageMainSection = () => {
   return (
     <section>
       <div className="my-10 mx-auto w-11/12 sm:w-11/12 lg:w-4/5 xl:w-11/12 2xl:w-3/4">
-        {user.bookings.length > 0 && (
+        {user.bookings?.length > 0 && (
           <SimpleGrid
             cols={1}
             breakpoints={[
@@ -58,7 +58,7 @@ const BookedTutorsPageMainSection = () => {
             })}
           </SimpleGrid>
         )}
-        {user.bookings.length === 0 && (
+        {user.bookings?.length === 0 && (
           <div className="w-1/2 my-0 mx-auto flex items-center justify-center">
             <Image src={noData} />
           </div>

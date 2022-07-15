@@ -35,6 +35,9 @@ const TutorBookingDrawer = () => {
   const onCloseHandler = () => {
     dispatch(closeDrawer());
     setTutor({});
+    setLocation(user.address);
+    setErrors({ time: "", location: "" });
+    setTime([timeStart, timeEnd]);
   };
   useEffect(() => {
     const getTutor = async () => {
@@ -76,7 +79,9 @@ const TutorBookingDrawer = () => {
               setUser,
               totalPrice,
             });
-            onCloseHandler();
+            if (timeDifference > 59 && !location.length < 5) {
+              onCloseHandler();
+            }
           }}
           className="m-6"
         >

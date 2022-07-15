@@ -41,7 +41,7 @@ const BookmarkPageMainSection = () => {
               />
             );
           })}
-        {user.bookmarks.length === 0 && (
+        {user.bookmarks?.length === 0 && (
           <div className="w-1/2 my-0 mx-auto flex items-center justify-center">
             <Image src={noData} />
           </div>

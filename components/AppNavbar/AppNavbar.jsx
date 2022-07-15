@@ -10,14 +10,17 @@ import { getUserData } from "../../utilities";
 import { BsBookmark } from "react-icons/bs";
 import { useLocalStorage } from "@mantine/hooks";
 import { getAuth, signOut } from "firebase/auth";
-
+import { toggleNavbar } from "../../context/navbarSlice";
+import { useDispatch } from "react-redux";
 const NavLink = ({ children, href, exact, ...props }) => {
   const { pathname } = useRouter();
   const isActive = pathname === href;
+  const dispatch = useDispatch();
 
   return (
     <Link href={href}>
       <a
+        onClick={() => dispatch(toggleNavbar())}
         className={`${
           isActive && "active"
         } flex items-center w-full py-2 mb-1 rounded-lg px-3 font-semibold ${

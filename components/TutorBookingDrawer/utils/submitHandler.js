@@ -15,9 +15,8 @@ const submitHandler = async ({
   setUser,
   totalPrice,
 }) => {
-  if (location.trim() === "") {
-    setErrors({ location: "Please enter a location" });
-  } else if (location.length < 5) {
+  console.log(errors);
+  if (location.length < 5) {
     setErrors({ location: "Please enter a valid location" });
   } else if (timeDifference < 59) {
     setErrors({ time: "A session can't be less than 1 hour" });
@@ -27,8 +26,6 @@ const submitHandler = async ({
       location: "",
     });
   }
-
-  console.log(dayjs(date[0]).toISOString());
 
   let alreadyBooked = false;
   if (user.bookings.length === 10) {
@@ -54,7 +51,7 @@ const submitHandler = async ({
     }
   });
 
-  if (!errors.time && !errors.location && !alreadyBooked) {
+  if (timeDifference > 59 && !location.length < 5 && !alreadyBooked) {
     try {
       const { currentUser } = getAuth();
       await setDoc(
@@ -99,6 +96,7 @@ const submitHandler = async ({
         title: "Hurray!",
         message: "Booked successfully",
       });
+      setErrors({ time: "", location: "" });
     } catch (error) {
       console.log(error);
     }
