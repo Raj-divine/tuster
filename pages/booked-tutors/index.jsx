@@ -27,7 +27,7 @@ const BookedTutorPage = () => {
   return (
     <>
       <Head>
-        <title>Home | Tuster</title>
+        <title>Booked Tutors | Tuster</title>
       </Head>
       {userLoggedIn && (
         <>

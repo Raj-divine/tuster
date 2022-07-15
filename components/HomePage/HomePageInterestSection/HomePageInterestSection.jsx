@@ -52,7 +52,7 @@ const HomePageInterestSection = () => {
 
   return (
     <section className="px-4 sm:px-10 pt-10">
-      <h3 className="font-merriweather italic text-xl xs:text-2xl sm:text-4xl ">
+      <h3 className="font-raleway italic text-xl xs:text-2xl sm:text-4xl ">
         Based on your interests, {userData.firstName}
       </h3>
       <div className="2xl:w-2/3 xl:w-11/12">

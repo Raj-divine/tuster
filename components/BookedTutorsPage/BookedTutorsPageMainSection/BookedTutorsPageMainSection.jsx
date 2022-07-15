@@ -9,8 +9,8 @@ const BookedTutorsPageMainSection = () => {
   const [tutors, setTutors] = useState([]);
 
   useEffect(() => {
-    const getTutors = async () => {
-      setTutors([]);
+    setTutors([]);
+    const getTutors = () => {
       user.bookings.forEach(async (booking) => {
         const tutorSnap = await getDoc(doc(db, "tutors", booking.tutor));
         setTutors((prevTutors) => {

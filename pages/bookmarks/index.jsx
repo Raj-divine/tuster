@@ -1,4 +1,4 @@
-import { useMantineColorScheme, AppShell } from "@mantine/core";
+import { useMantineColorScheme, AppShell, Divider } from "@mantine/core";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -6,6 +6,9 @@ import AppHeader from "../../components/AppHeader/AppHeader";
 import AppLoader from "../../components/AppLoader/AppLoader";
 import AppNavbar from "../../components/AppNavbar/AppNavbar";
 import Head from "next/head";
+import BookmarkPageMainSection from "../../components/BookmarkPage/BookmarkPageMainSection/BookmarkPageMainSection";
+import BookmarkPageHeader from "../../components/BookmarkPage/BookmarkPageHeader/BookmarkPageHeader";
+import TutorBookingDrawer from "../../components/TutorBookingDrawer/TutorBookingDrawer";
 const BookmarkPage = () => {
   const { colorScheme } = useMantineColorScheme();
   const [userLoggedIn, setUserLoggedIn] = useState(false);
@@ -39,7 +42,12 @@ const BookmarkPage = () => {
               className={
                 colorScheme === "dark" ? "dark w-full h-full" : "w-full h-full"
               }
-            ></div>
+            >
+              <BookmarkPageHeader />
+              <Divider my="sm" className="p-0 m-0" />
+              <BookmarkPageMainSection />
+              <TutorBookingDrawer />
+            </div>
           </AppShell>
         </>
       )}
