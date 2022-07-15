@@ -2,15 +2,19 @@ import { Navbar, useMantineColorScheme, Avatar, Text } from "@mantine/core";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import Link from "next/link";
-import { AiOutlineHome } from "react-icons/ai";
+import { AiOutlineHome, AiOutlineLogout } from "react-icons/ai";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { getUserData } from "../../utilities";
 import { BsBookmark } from "react-icons/bs";
+import { useLocalStorage } from "@mantine/hooks";
+import { getAuth, signOut } from "firebase/auth";
+
 const NavLink = ({ children, href, exact, ...props }) => {
   const { pathname } = useRouter();
   const isActive = pathname === href;
+
   return (
     <Link href={href}>
       <a
@@ -30,9 +34,15 @@ const NavLink = ({ children, href, exact, ...props }) => {
 const AppNavbar = () => {
   const { colorScheme } = useMantineColorScheme();
   const { isOpen } = useSelector((state) => state.navbar);
-
+  const [userData, setUserData] = useLocalStorage({ key: "user-data" });
+  const auth = getAuth();
   const [user, setUser] = useState(null);
 
+  const logout = () => {
+    signOut(auth).then(() => {
+      setUserData({});
+    });
+  };
   useEffect(() => {
     const getUser = async () => {
       const user = await getUserData();
@@ -66,8 +76,18 @@ const AppNavbar = () => {
           <li>
             <NavLink href="/bookmarks">
               <BsBookmark className="text-2xl mr-4" />
-              bookmarks
+              Bookmarks
             </NavLink>
+          </li>
+
+          <li>
+            <button
+              onClick={logout}
+              className="flex text-red-400 hover:text-red-500 hover:bg-red-200 dark:hover:bg-red-900 dark:hover:text-red-400 transition-colors font-montserrat items-center w-full py-2 mb-1 rounded-lg px-3 font-semibold"
+            >
+              <AiOutlineLogout className="text-2xl mr-4" />
+              Logout
+            </button>
           </li>
         </ul>
       </Navbar.Section>

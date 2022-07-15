@@ -7,11 +7,9 @@ import Head from "next/head";
 import LandingPageStatsSection from "../components/LandingPage/LandingPageStatsSection/LandingPageStatsSection";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import AppLoader from "../components/AppLoader/AppLoader";
-import { useLocalStorage } from "@mantine/hooks";
 export default function LandingPage() {
-  const [user, setUser] = useLocalStorage({ key: "user-data" });
   const { colorScheme } = useMantineColorScheme();
   const router = useRouter();
   const auth = getAuth();
@@ -26,15 +24,6 @@ export default function LandingPage() {
       }
     });
   }, [auth]);
-
-  useEffect(() => {
-    signOut(auth)
-      .then(() => {
-        setUser({});
-        setUserLoggedIn(false);
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
   return (
     <>

@@ -43,7 +43,7 @@ const HomePageNewSubSection = () => {
   }, []);
 
   return (
-    <section className="px-4 sm:px-10 pt-10 ">
+    <section className="px-4 sm:px-10 pt-10 mb-10">
       <h3 className="font-raleway italic text-xl xs:text-2xl sm:text-4xl ">
         Let&apos;s try something new!
       </h3>
