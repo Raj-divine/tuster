@@ -22,11 +22,16 @@ const BookmarkPageMainSection = () => {
 
   return (
     <section className="flex justify-center">
-      <div className="w-3/4 mt-10">
+      <div className="w-11/12 sm:w-3/4 md:w-3/5 xl:w-11/12 2xl:w-3/4  mt-10">
         {tutors.length > 0 &&
           tutors.map((tutor) => {
             return <BookmarkPageBookmark tutor={tutor} />;
           })}
+        {user.bookmarks.length === 0 && (
+          <div className="w-full text-5xl font-raleway h-96 flex items-center justify-center">
+            No bookmarked tutors
+          </div>
+        )}
       </div>
     </section>
   );

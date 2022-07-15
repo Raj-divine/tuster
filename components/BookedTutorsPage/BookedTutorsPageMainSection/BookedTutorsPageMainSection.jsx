@@ -51,7 +51,7 @@ const BookedTutorsPageMainSection = () => {
         )}
         {user.bookings.length === 0 && (
           <div className="w-full text-5xl font-raleway h-96 flex items-center justify-center">
-            No Tutors booked :(
+            No Tutors booked
           </div>
         )}
       </div>

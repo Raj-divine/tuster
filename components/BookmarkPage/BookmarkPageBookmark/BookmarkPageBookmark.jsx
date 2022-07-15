@@ -51,9 +51,9 @@ const BookmarkPageBookmark = ({ tutor }) => {
   };
 
   return (
-    <div className="flex justify-between mb-8">
-      <div className="flex">
-        <div className="w-32 h-32 relative shadow-md">
+    <div className="flex flex-col rounded-lg border p-4 dark:border-dark-400 xl:flex-row justify-between mb-8">
+      <div className="flex flex-col xl:flex-row">
+        <div className="h-44 xs:h-60 xl:w-32 xl:h-32 relative shadow-md">
           <Image
             className="object-cover rounded-lg object-center"
             src={image}
@@ -68,17 +68,20 @@ const BookmarkPageBookmark = ({ tutor }) => {
           </div>
         </div>
 
-        <div className="flex flex-col justify-around ml-5">
+        <div className="flex flex-col justify-around mt-4 xl:mt-0 xl:ml-5">
           <div>
             <Text className="text-xl font-semibold">
               {firstName} {lastName}
             </Text>
           </div>
-          <div>
-            <SimpleGrid cols={3}>
+          <div className="mt-4 xl:mt-0">
+            <SimpleGrid
+              cols={2}
+              breakpoints={[{ minWidth: 450, cols: 3, spacing: "md" }]}
+            >
               {expertise.map((item) => {
                 return (
-                  <Badge className="text-teal-500 bg-teal-100 dark:bg-teal-900 dark:text-teal-200">
+                  <Badge className="w-32 text-teal-500 bg-teal-100 dark:bg-teal-900 dark:text-teal-200">
                     {item}
                   </Badge>
                 );
@@ -88,7 +91,7 @@ const BookmarkPageBookmark = ({ tutor }) => {
         </div>
       </div>
 
-      <div className="flex">
+      <div className="flex justify-between xl:justify-start mt-4">
         <Link href={`/tutor/${uid}`}>
           <Button
             className="text-teal-400 hover:bg-teal-50 dark:text-white dark:hover:bg-dark-500"
