@@ -8,13 +8,14 @@ import { db } from "../../../firebase/firebaseConfig";
 import { useLocalStorage } from "@mantine/hooks";
 import Link from "next/link";
 import { doc, setDoc } from "firebase/firestore";
-const BookmarkPageBookmark = ({ tutor }) => {
+const BookmarkPageBookmark = ({ tutor, tutorRemoveHandler }) => {
   const dispatch = useDispatch();
   const [user, setUser] = useLocalStorage({ key: "user-data" });
   const buttonRef = useRef();
   const { image, firsName: firstName, lastName, expertise, uid } = tutor;
 
   const bookmarkHandler = async () => {
+    tutorRemoveHandler(uid);
     if (user.bookmarks.includes(uid)) {
       setUser((prevUser) => {
         return {

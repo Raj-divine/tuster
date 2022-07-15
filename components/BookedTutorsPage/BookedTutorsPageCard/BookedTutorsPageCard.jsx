@@ -5,13 +5,20 @@ import { db } from "../../../firebase/firebaseConfig";
 import dayjs from "dayjs";
 import Image from "next/image";
 import { useRef } from "react";
-const BookedTutorsPageCard = ({ tutor, date, time, totalPrice }) => {
+const BookedTutorsPageCard = ({
+  tutor,
+  date,
+  time,
+  totalPrice,
+  tutorRemoveHandler,
+}) => {
   const { image, firsName: firstName, lastName, description, uid } = tutor;
   const [user, setUser] = useLocalStorage({ key: "user-data" });
 
   const buttonRef = useRef();
 
   const cancelHandler = async () => {
+    tutorRemoveHandler(uid);
     const newBookings = user.bookings.filter(
       (item) => item.tutor !== buttonRef.current.dataset.uid
     );

@@ -8,6 +8,12 @@ const BookedTutorsPageMainSection = () => {
   const [user] = useLocalStorage({ key: "user-data" });
   const [tutors, setTutors] = useState([]);
 
+  const tutorRemoveHandler = (tutorId) => {
+    setTutors((prevTutors) =>
+      prevTutors.filter((tutor) => tutor.uid !== tutorId)
+    );
+  };
+
   useEffect(() => {
     setTutors([]);
     const getTutors = () => {
@@ -19,7 +25,7 @@ const BookedTutorsPageMainSection = () => {
       });
     };
     getTutors();
-  }, [user]);
+  }, []);
 
   return (
     <section>
@@ -43,6 +49,7 @@ const BookedTutorsPageMainSection = () => {
                     time={user.bookings[i].time}
                     totalPrice={user.bookings[i].totalPrice}
                     tutor={tutor}
+                    tutorRemoveHandler={tutorRemoveHandler}
                   />
                 );
               }

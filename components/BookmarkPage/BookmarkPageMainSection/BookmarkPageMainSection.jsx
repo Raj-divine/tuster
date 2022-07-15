@@ -6,6 +6,13 @@ import BookmarkPageBookmark from "../BookmarkPageBookmark/BookmarkPageBookmark";
 const BookmarkPageMainSection = () => {
   const [user] = useLocalStorage({ key: "user-data" });
   const [tutors, setTutors] = useState([]);
+
+  const tutorRemoveHandler = (tutorId) => {
+    setTutors((prevTutors) =>
+      prevTutors.filter((tutor) => tutor.uid !== tutorId)
+    );
+  };
+
   useEffect(() => {
     setTutors([]);
     const getTutors = () => {
@@ -18,14 +25,19 @@ const BookmarkPageMainSection = () => {
       });
     };
     getTutors();
-  }, [user]);
+  }, []);
 
   return (
     <section className="flex justify-center">
       <div className="w-11/12 sm:w-3/4 md:w-3/5 xl:w-11/12 2xl:w-3/4  mt-10">
         {tutors.length > 0 &&
           tutors.map((tutor) => {
-            return <BookmarkPageBookmark tutor={tutor} />;
+            return (
+              <BookmarkPageBookmark
+                tutorRemoveHandler={tutorRemoveHandler}
+                tutor={tutor}
+              />
+            );
           })}
         {user.bookmarks.length === 0 && (
           <div className="w-full text-5xl font-raleway h-96 flex items-center justify-center">
