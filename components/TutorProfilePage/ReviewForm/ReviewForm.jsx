@@ -1,4 +1,4 @@
-import { Textarea, Text } from "@mantine/core";
+import { Textarea, Text, Button } from "@mantine/core";
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 const ReviewForm = () => {
@@ -43,7 +43,16 @@ const ReviewForm = () => {
           })}
         </div>
       </div>
-      <Textarea placeholder="Write a review" label="Write a review" required />
+      <Textarea
+        autosize
+        placeholder="Write a review"
+        minRows={3}
+        label="Write a review"
+        required
+      />
+      <div className="mt-4 flex justify-end ">
+        <Button className="button-primary">Submit</Button>
+      </div>
     </form>
   );
 };

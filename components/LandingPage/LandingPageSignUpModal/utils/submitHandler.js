@@ -49,6 +49,7 @@ const submitHandler = async ({
           socials: {},
           bookings: [],
           bookmarks: [],
+          notReviewed: [],
         };
 
         await setDoc(doc(db, "users", user.uid), userDoc);

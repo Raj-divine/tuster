@@ -73,6 +73,7 @@ const submitHandler = async ({
               totalPrice,
             },
           ],
+          notReviewed: [...user.notReviewed, tutorId],
         },
         { merge: true }
       );
@@ -89,6 +90,7 @@ const submitHandler = async ({
             totalPrice,
           },
         ],
+        notReviewed: [...prevUser.notReviewed, tutorId],
       }));
       showNotification({
         autoClose: 3000,

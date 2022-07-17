@@ -22,14 +22,22 @@ const BookedTutorsPageCard = ({
     const newBookings = user.bookings.filter(
       (item) => item.tutor !== buttonRef.current.dataset.uid
     );
-    await setDoc(doc(db, "users", user.uid), {
-      ...user,
-      bookings: newBookings,
-    });
+    const newNotReviewed = user.notReviewed.filter(
+      (item) => item !== buttonRef.current.dataset.uid
+    );
+    await setDoc(
+      doc(db, "users", user.uid),
+      {
+        bookings: newBookings,
+        notReviewed: newNotReviewed,
+      },
+      { merge: true }
+    );
     setUser((prevUser) => {
       return {
         ...prevUser,
         bookings: newBookings,
+        notReviewed: newNotReviewed,
       };
     });
   };
