@@ -123,10 +123,7 @@ const ProfilePageEditSection = () => {
             </div>
           </div>
           <div className="sm:mt-2 sm:mb-4">
-            <Button
-              type="submit"
-              className="bg-teal-400 hover:bg-teal-500 dark:hover:bg-teal-600"
-            >
+            <Button type="submit" className="button-primary">
               Edit Profile
             </Button>
           </div>

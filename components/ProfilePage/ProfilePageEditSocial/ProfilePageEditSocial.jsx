@@ -97,10 +97,7 @@ const ProfilePageEditSocial = () => {
             </div>
           </div>
           <div className="col-start-2 flex justify-end ">
-            <Button
-              type="submit"
-              className="bg-teal-400 hover:bg-teal-500 dark:hover:bg-teal-600"
-            >
+            <Button type="submit" className="button-primary">
               Edit socials
             </Button>
           </div>

@@ -11,4 +11,7 @@
   .active {
     @apply bg-teal-100 dark:bg-dark-400 text-teal-500;
   }
+  .button-primary {
+    @apply bg-teal-400 hover:bg-teal-500 dark:bg-teal-500 dark:hover:bg-teal-600;
+  }
 }

@@ -127,10 +127,7 @@ const TutorBookingDrawer = () => {
                 {totalPrice >= 0 ? `$${totalPrice}` : "$0"}
               </Text>
             </div>
-            <Button
-              type="submit"
-              className="bg-teal-400 hover:bg-teal-500 dark:bg-teal-500 dark:hover:bg-teal-600"
-            >
+            <Button type="submit" className="button-primary">
               Book now
             </Button>
           </div>

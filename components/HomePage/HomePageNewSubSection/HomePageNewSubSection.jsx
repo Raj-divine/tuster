@@ -58,10 +58,7 @@ const HomePageNewSubSection = () => {
 
           {!isFinal && tutors.length !== 0 && (
             <Center>
-              <Button
-                className="bg-teal-400 hover:bg-teal-500"
-                onClick={getTutors}
-              >
+              <Button className="button-primary" onClick={getTutors}>
                 load more
               </Button>
             </Center>

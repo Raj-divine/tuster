@@ -93,7 +93,7 @@ const HomePageTutor = ({ tutor }) => {
             </Link>
             <Space w={10} />
             <Button
-              className="bg-teal-400 hover:bg-teal-500 dark:bg-teal-500 dark:hover:bg-teal-600"
+              className="button-primary"
               component="a"
               ref={buttonRef}
               data-uid={uid}
