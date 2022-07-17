@@ -1,5 +1,6 @@
 import { Text, Space, Tabs, Badge } from "@mantine/core";
 import DetailComponent from "../DetailComponent/DetailComponent";
+import ReviewComponent from "../ReviewComponent/ReviewComponent";
 const ProfilePageDetailSection = ({ tutor }) => {
   const { description, expertise } = tutor;
 
@@ -37,13 +38,13 @@ const ProfilePageDetailSection = ({ tutor }) => {
         </div>
       </div>
 
-      <div className="xl:w-[70%] mt-10">
+      <div className="xl:w-[70%] mt-10 2xl:mt-0">
         <Tabs className="w-full h-full" color="teal">
           <Tabs.Tab className="text-base" label="Details">
             <DetailComponent tutor={tutor} />
           </Tabs.Tab>
-          <Tabs.Tab className="text-base" label="reviews">
-            No Reviews
+          <Tabs.Tab className="text-base" label="Reviews">
+            <ReviewComponent tutor={tutor} />
           </Tabs.Tab>
         </Tabs>
       </div>
