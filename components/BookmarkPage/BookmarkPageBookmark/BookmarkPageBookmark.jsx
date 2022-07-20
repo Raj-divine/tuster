@@ -80,9 +80,12 @@ const BookmarkPageBookmark = ({ tutor, tutorRemoveHandler }) => {
               cols={2}
               breakpoints={[{ minWidth: 450, cols: 3, spacing: "md" }]}
             >
-              {expertise.map((item) => {
+              {expertise.map((item, i) => {
                 return (
-                  <Badge className="w-32 text-teal-500 bg-teal-100 dark:bg-teal-900 dark:text-teal-200">
+                  <Badge
+                    key={i}
+                    className="w-32 text-teal-500 bg-teal-100 dark:bg-teal-900 dark:text-teal-200"
+                  >
                     {item}
                   </Badge>
                 );

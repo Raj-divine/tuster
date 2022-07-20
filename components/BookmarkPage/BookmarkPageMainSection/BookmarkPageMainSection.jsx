@@ -33,9 +33,10 @@ const BookmarkPageMainSection = () => {
     <section className="flex justify-center">
       <div className="w-11/12 sm:w-3/4 md:w-3/5 xl:w-11/12 2xl:w-3/4  mt-10">
         {tutors.length > 0 &&
-          tutors.map((tutor) => {
+          tutors.map((tutor, i) => {
             return (
               <BookmarkPageBookmark
+                key={i}
                 tutorRemoveHandler={tutorRemoveHandler}
                 tutor={tutor}
               />
