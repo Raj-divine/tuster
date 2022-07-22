@@ -23,7 +23,7 @@ const TutorProfileMainSection = ({ tutor }) => {
   const dispatch = useDispatch();
 
   const bookmarkHandler = async () => {
-    if (user.bookmarks.includes(uid)) {
+    if (user.bookmarks?.includes(uid)) {
       setUser((prevUser) => {
         return {
           ...prevUser,
@@ -60,7 +60,7 @@ const TutorProfileMainSection = ({ tutor }) => {
 
   let bookmarkIcon = <BsBookmark size={30} />;
 
-  user.bookmarks.forEach((bookmark) => {
+  user.bookmarks?.forEach((bookmark) => {
     if (bookmark === uid) {
       bookmarkIcon = <BsFillBookmarkFill size={30} />;
     }

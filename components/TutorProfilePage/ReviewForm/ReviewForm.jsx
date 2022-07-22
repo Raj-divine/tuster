@@ -2,17 +2,16 @@ import { Textarea, Text, Button } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, setDoc } from "firebase/firestore";
 import { useLocalStorage } from "@mantine/hooks";
 import { db } from "../../../firebase/firebaseConfig";
-const ReviewForm = ({ tutor }) => {
+const ReviewForm = ({ tutor, getReviews }) => {
   const { uid: tutorId } = tutor;
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [body, setBody] = useState("");
   const [bodyError, setBodyError] = useState("");
-
-  const [user] = useLocalStorage({ key: "user-data" });
+  const [user, setUser] = useLocalStorage({ key: "user-data" });
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -30,19 +29,41 @@ const ReviewForm = ({ tutor }) => {
       return;
     }
 
-    const reviewRef = await addDoc(collection(db, "reviews"), {
+    setUser((prevUser) => {
+      return {
+        ...prevUser,
+        notReviewed: prevUser.notReviewed.filter((item) => item !== tutor.uid),
+      };
+    });
+    await addDoc(collection(db, "reviews"), {
       body,
       rating,
-      from: user.uid,
+      user: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        uid: user.uid,
+      },
       of: tutorId,
     });
-    console.log(reviewRef);
+
+    await setDoc(
+      doc(db, "users", user.uid),
+      {
+        notReviewed: user.notReviewed.filter((item) => item !== tutor.uid),
+      },
+      { merge: true }
+    );
+
+    setBody("");
+    setRating(0);
+    setHover(0);
+    getReviews();
   };
 
   return (
     <form
       onSubmit={submitHandler}
-      className="border rounded-lg p-2 sm:p-4 dark:border-dark-400"
+      className="border mb-4 rounded-lg p-2 sm:p-4 dark:border-dark-400"
     >
       <div className="mb-4">
         <Text className="text-xl" color="dimmed">
