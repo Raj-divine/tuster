@@ -40,10 +40,21 @@ const AppNavbar = () => {
   const [userData, setUserData] = useLocalStorage({ key: "user-data" });
   const auth = getAuth();
   const [user, setUser] = useState(null);
-
+  const userDataPlaceHolder = {
+    address: "",
+    bookings: [],
+    bookmarks: [],
+    email: "",
+    firstName: "",
+    lastName: "",
+    notReviewed: [],
+    phone: "",
+    socials: {},
+    subjects: [],
+  };
   const logout = () => {
     signOut(auth).then(() => {
-      setUserData({});
+      setUserData(userDataPlaceHolder);
     });
   };
   useEffect(() => {
