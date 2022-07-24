@@ -38,7 +38,7 @@ const AppNavbar = () => {
   const { colorScheme } = useMantineColorScheme();
   const { isOpen } = useSelector((state) => state.navbar);
   const auth = getAuth();
-
+  const [_, setUserData] = useLocalStorage({ key: "user-data" });
   const [user, setUser] = useState({
     firstName: " ",
     lastName: " ",
@@ -46,6 +46,7 @@ const AppNavbar = () => {
 
   const logout = async () => {
     await signOut(auth);
+    setUserData({});
   };
   useEffect(() => {
     const getUser = async () => {
