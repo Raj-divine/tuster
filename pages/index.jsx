@@ -9,10 +9,12 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import AppLoader from "../components/AppLoader/AppLoader";
+import { useLocalStorage } from "@mantine/hooks";
 export default function LandingPage() {
   const { colorScheme } = useMantineColorScheme();
   const router = useRouter();
   const auth = getAuth();
+  const [userData, setUserData] = useLocalStorage({ key: "user-data" });
   const [userLoggedIn, setUserLoggedIn] = useState(true);
 
   useEffect(() => {
@@ -24,6 +26,21 @@ export default function LandingPage() {
       }
     });
   }, [auth]);
+
+  useEffect(() => {
+    setUserData({
+      firstName: " ",
+      lastName: " ",
+      socials: {},
+      bookings: [],
+      bookmarks: [],
+      email: "",
+      notReviewed: [],
+      subjects: [],
+      address: "",
+      phone: "",
+    });
+  }, []);
 
   return (
     <>

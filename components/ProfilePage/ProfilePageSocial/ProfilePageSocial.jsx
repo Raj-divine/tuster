@@ -22,11 +22,8 @@ const SocialTableRow = ({ children, platform }) => {
   );
 };
 
-const ProfilePageSocial = () => {
-  const [user] = useLocalStorage({ key: "user-data" });
-
-  const { instagram, linkedin, twitter, facebook } = user.socials;
-
+const ProfilePageSocial = ({ user }) => {
+  const { instagram, twitter, linkedin, facebook } = user.socials;
   return (
     <div className="lg:col-span-1 lg:row-span-1 xl:col-span-1 xl:row-span-1 2xl:col-span-2 2xl:row-span-1 p-8  xl:mt-10 rounded-lg shadow-xl border dark:border-dark-400">
       <div className="flex flex-col justify-between">

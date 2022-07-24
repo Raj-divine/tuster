@@ -7,13 +7,11 @@ import {
   Space,
   Button,
 } from "@mantine/core";
-import { useLocalStorage } from "@mantine/hooks";
 import { useState } from "react";
 import { ALL_SUBJECTS_DATA } from "../../../FakeData";
 import submitHandler from "./utils/submitHandler";
 
-const ProfilePageEditSection = () => {
-  const [user, setUser] = useLocalStorage({ key: "user-data" });
+const ProfilePageEditSection = ({ user }) => {
   const initialFormState = {
     email: user.email,
     address: user.address,
@@ -21,10 +19,10 @@ const ProfilePageEditSection = () => {
   };
 
   const initialErrorState = {
-    email: "",
-    address: "",
-    phone: "",
-    subjects: "",
+    email: "" || "",
+    address: "" || "",
+    phone: "" || "",
+    subjects: "" || "",
   };
   const [formData, setFormData] = useState(initialFormState);
   const [subjects, setSubjects] = useState(user.subjects);

@@ -10,22 +10,20 @@ import {
 } from "firebase/firestore";
 import { Button, Center, Loader, ScrollArea, Text } from "@mantine/core";
 import { db } from "../../../firebase/firebaseConfig.js";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import { useState } from "react";
 import { getUserData } from "../../../utilities";
-import { useLocalStorage } from "@mantine/hooks";
 
 const HomePageInterestSection = () => {
   const [tutors, setTutors] = useState([]);
   const [isFinal, setIsFinal] = useState(false);
   const [latestDoc, setLatestDoc] = useState("0");
-  const [userData] = useLocalStorage({ key: "user-data" });
+  const [userData, setUserData] = useState({});
 
   async function getTutors() {
     const tutorRef = collection(db, "tutors");
     const user = await getUserData();
-
+    setUserData(user);
     const q = query(
       tutorRef,
       where("expertise", "array-contains-any", user.subjects),
@@ -49,7 +47,6 @@ const HomePageInterestSection = () => {
   useEffect(() => {
     getTutors();
   }, []);
-
   return (
     <section className="px-4 sm:px-10 pt-10">
       <h3 className="section-heading italic inline-block">

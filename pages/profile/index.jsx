@@ -1,5 +1,4 @@
 import { AppShell, useMantineColorScheme } from "@mantine/core";
-import { useLocalStorage } from "@mantine/hooks";
 import { getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
@@ -13,13 +12,33 @@ import ProfilePageSocial from "../../components/ProfilePage/ProfilePageSocial/Pr
 import ProfilePageEditSocial from "../../components/ProfilePage/ProfilePageEditSocial/ProfilePageEditSocial";
 import ProfilePageEditSection from "../../components/ProfilePage/ProfilePageEditSection/ProfilePageEditSection";
 import ProfilePagePasswordReset from "../../components/ProfilePage/ProfilePagePasswordReset/ProfilePagePasswordResetPage";
+import { getUserData } from "../../utilities";
 
 const ProfilePage = () => {
   const { colorScheme } = useMantineColorScheme();
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const auth = getAuth();
   const router = useRouter();
-  const [user] = useLocalStorage({ key: "user-data" });
+  const [user, setUser] = useState({
+    firstName: " ",
+    lastName: " ",
+    socials: {},
+    bookings: [],
+    bookmarks: [],
+    email: "",
+    notReviewed: [],
+    subjects: [],
+    address: "",
+    phone: "",
+  });
+
+  useEffect(() => {
+    const getUser = async () => {
+      const userData = await getUserData();
+      setUser(userData);
+    };
+    getUser();
+  });
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -47,10 +66,10 @@ const ProfilePage = () => {
         >
           <div className={`${colorScheme === "dark" ? "dark" : ""}`}>
             <div className="m:w-4/5 md:w-2/3 lg:w-3/4 xl:w-11/12 my-0 mx-auto h-full grid xl:grid-cols-2 lg:gird-cols-1 lg:grid-rows-8 xl:grid-rows-3 2xl:grid-cols-3 gap-3">
-              <ProfilePageMainProfile />
-              <ProfilePageSocial />
-              <ProfilePageEditSocial />
-              <ProfilePageEditSection />
+              <ProfilePageMainProfile user={user} />
+              <ProfilePageSocial user={user} />
+              <ProfilePageEditSocial user={user} />
+              <ProfilePageEditSection user={user} />
               <ProfilePagePasswordReset />
             </div>
           </div>

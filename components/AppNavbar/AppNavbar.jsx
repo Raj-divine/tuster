@@ -37,30 +37,20 @@ const NavLink = ({ children, href, exact, ...props }) => {
 const AppNavbar = () => {
   const { colorScheme } = useMantineColorScheme();
   const { isOpen } = useSelector((state) => state.navbar);
-  const [userData, setUserData] = useLocalStorage({ key: "user-data" });
   const auth = getAuth();
-  const [user, setUser] = useState(null);
-  const userDataPlaceHolder = {
-    address: "",
-    bookings: [],
-    bookmarks: [],
-    email: "",
-    firstName: "",
-    lastName: "",
-    notReviewed: [],
-    phone: "",
-    socials: {},
-    subjects: [],
-  };
-  const logout = () => {
-    signOut(auth).then(() => {
-      setUserData(userDataPlaceHolder);
-    });
+
+  const [user, setUser] = useState({
+    firstName: " ",
+    lastName: " ",
+  });
+
+  const logout = async () => {
+    await signOut(auth);
   };
   useEffect(() => {
     const getUser = async () => {
-      const user = await getUserData();
-      setUser(user);
+      const userData = await getUserData();
+      setUser(userData);
     };
     getUser();
   }, []);
@@ -116,12 +106,12 @@ const AppNavbar = () => {
                   }}
                   radius="xl"
                 >
-                  {user.firstName[0].toUpperCase()}
+                  {user.firstName[0]?.toUpperCase()}
                 </Avatar>
               </div>
               <div className="ml-4 w-3/4">
                 <Text className="text-sm truncate w-4/5">
-                  {user.firstName} {user.lastName}
+                  {user?.firstName} {user?.lastName}
                 </Text>
                 <Text className="text-xs truncate w-4/5">{user.email}</Text>
               </div>

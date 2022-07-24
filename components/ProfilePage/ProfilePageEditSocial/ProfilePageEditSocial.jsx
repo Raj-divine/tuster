@@ -4,8 +4,7 @@ import { showNotification } from "@mantine/notifications";
 import { useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
-const ProfilePageEditSocial = () => {
-  const [user, setUser] = useLocalStorage({ key: "user-data" });
+const ProfilePageEditSocial = ({ user }) => {
   const [socials, setSocials] = useState({
     instagram: user.socials.instagram || "",
     twitter: user.socials.twitter || "",
