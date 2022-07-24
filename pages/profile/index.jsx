@@ -45,16 +45,14 @@ const ProfilePage = () => {
           header={<AppHeader />}
           navbar={<AppNavbar />}
         >
-          <div
-            className={`${
-              colorScheme === "dark" ? "dark" : ""
-            } sm:w-4/5 md:w-2/3 lg:w-3/4 xl:w-11/12 my-0 mx-auto h-full grid xl:grid-cols-2 lg:gird-cols-1 lg:grid-rows-8 xl:grid-rows-3 2xl:grid-cols-3 gap-3`}
-          >
-            <ProfilePageMainProfile />
-            <ProfilePageSocial />
-            <ProfilePageEditSocial />
-            <ProfilePageEditSection />
-            <ProfilePagePasswordReset />
+          <div className={`${colorScheme === "dark" ? "dark" : ""}`}>
+            <div className="m:w-4/5 md:w-2/3 lg:w-3/4 xl:w-11/12 my-0 mx-auto h-full grid xl:grid-cols-2 lg:gird-cols-1 lg:grid-rows-8 xl:grid-rows-3 2xl:grid-cols-3 gap-3">
+              <ProfilePageMainProfile />
+              <ProfilePageSocial />
+              <ProfilePageEditSocial />
+              <ProfilePageEditSection />
+              <ProfilePagePasswordReset />
+            </div>
           </div>
         </AppShell>
       )}

@@ -17,7 +17,7 @@ const Detail = ({ value, label }) => {
 const DetailComponent = ({ tutor }) => {
   const { age, address, gender, email, phone } = tutor;
   return (
-    <div className="flex flex-col">
+    <div style={{ height: "400px" }} className="flex flex-col">
       <Detail value={age} label="Age" />
       <Detail value={address} label="Address" />
       <Detail value={gender} label="Gender" />
