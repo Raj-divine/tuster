@@ -7,28 +7,39 @@ import {
   Space,
   Button,
 } from "@mantine/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ALL_SUBJECTS_DATA } from "../../../FakeData";
 import submitHandler from "./utils/submitHandler";
-
-const ProfilePageEditSection = ({ user }) => {
-  const initialFormState = {
-    email: user.email,
-    address: user.address,
-    phone: user.phone,
-  };
-
+import { getUserData } from "../../../utilities";
+const ProfilePageEditSection = () => {
+  const [user, setUser] = useState({});
   const initialErrorState = {
-    email: "" || "",
-    address: "" || "",
-    phone: "" || "",
-    subjects: "" || "",
+    email: "",
+    address: "",
+    phone: "",
+    subjects: "",
   };
-  const [formData, setFormData] = useState(initialFormState);
-  const [subjects, setSubjects] = useState(user.subjects);
+
+  const [formData, setFormData] = useState({});
+  const [subjects, setSubjects] = useState([]);
 
   const [errors, setErrors] = useState(initialErrorState);
+  useEffect(() => {
+    const getUser = async () => {
+      const userData = await getUserData();
+      setUser(userData);
+      setFormData({
+        email: userData.email,
+        address: userData.address,
+        phone: userData.phone,
+      });
+      setSubjects(userData.subjects);
+    };
+    getUser();
+  }, []);
 
+  console.log(user);
+  console.log(formData);
   return (
     <div className="lg:col-span-1 xl:row-span-1 xl:col-span-1 2xl:col-span-2 rounded-lg p-8 pb-4 shadow-xl border dark:border-dark-400">
       <ScrollArea style={{ height: 250 }} type="scroll">

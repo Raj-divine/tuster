@@ -28,18 +28,20 @@ export default function LandingPage() {
   }, [auth]);
 
   useEffect(() => {
-    setUserData({
-      firstName: " ",
-      lastName: " ",
-      socials: {},
-      bookings: [],
-      bookmarks: [],
-      email: "",
-      notReviewed: [],
-      subjects: [],
-      address: "",
-      phone: "",
-    });
+    if (!userData) {
+      setUserData({
+        firstName: " ",
+        lastName: " ",
+        socials: {},
+        bookings: [],
+        bookmarks: [],
+        email: "",
+        notReviewed: [],
+        subjects: [],
+        address: "",
+        phone: "",
+      });
+    }
   }, []);
 
   return (

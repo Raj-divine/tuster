@@ -1,23 +1,30 @@
 import { TextInput, Button, Space, ScrollArea, Text } from "@mantine/core";
+import { useEffect, useState } from "react";
 import { useLocalStorage } from "@mantine/hooks";
-import { showNotification } from "@mantine/notifications";
-import { useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
-const ProfilePageEditSocial = ({ user }) => {
+const ProfilePageEditSocial = ({ user, getUser }) => {
+  const [_, setUser] = useLocalStorage({ key: "user-data" });
   const [socials, setSocials] = useState({
-    instagram: user.socials.instagram || "",
-    twitter: user.socials.twitter || "",
-    linkedin: user.socials.linkedin || "",
-    facebook: user.socials.facebook || "",
+    instagram: "",
+    twitter: "",
+    linkedin: "",
+    facebook: "",
   });
-
-  const submitHandler = (e) => {
+  useEffect(() => {
+    setSocials({
+      instagram: user.socials.instagram || "",
+      twitter: user.socials.twitter || "",
+      linkedin: user.socials.linkedin || "",
+      facebook: user.socials.facebook || "",
+    });
+  }, []);
+  const submitHandler = async (e) => {
     e.preventDefault();
-
     const userRef = doc(db, "users", user.uid);
-    setDoc(userRef, { socials }, { merge: true });
+    await setDoc(userRef, { socials }, { merge: true });
     setUser((prevUser) => ({ ...prevUser, socials }));
+    getUser();
   };
 
   return (
@@ -30,7 +37,7 @@ const ProfilePageEditSocial = ({ user }) => {
           <div className="flex flex-col sm:flex-row">
             <div className="mb-6 sm:w-1/2">
               <TextInput
-                value={user.socials.instagram && socials.instagram}
+                value={socials.instagram}
                 placeholder="Add Instagram Handle"
                 label="Instagram handle"
                 onChange={(e) =>
@@ -47,7 +54,7 @@ const ProfilePageEditSocial = ({ user }) => {
 
             <div className="mb-6 sm:mb-0 sm:w-1/2">
               <TextInput
-                value={user.socials.instagram && socials.twitter}
+                value={socials.twitter}
                 placeholder="Add Twitter Handle"
                 label="twitter handle"
                 onChange={(e) =>
@@ -65,7 +72,7 @@ const ProfilePageEditSocial = ({ user }) => {
           <div className="flex flex-col sm:flex-row">
             <div className="mb-6 sm:w-1/2">
               <TextInput
-                value={user.socials.instagram && socials.linkedin}
+                value={socials.linkedin}
                 placeholder="Add LinkedIn Handle"
                 label="linkedin handle"
                 onChange={(e) =>
@@ -81,7 +88,7 @@ const ProfilePageEditSocial = ({ user }) => {
             <Space w={20} />
             <div className="mb-6 sm:mb-0  sm:w-1/2">
               <TextInput
-                value={user.socials.instagram && socials.facebook}
+                value={socials.facebook}
                 placeholder="Add Facebook Handle"
                 label="facebook handle"
                 onChange={(e) =>

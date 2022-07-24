@@ -13,12 +13,14 @@ import ProfilePageEditSocial from "../../components/ProfilePage/ProfilePageEditS
 import ProfilePageEditSection from "../../components/ProfilePage/ProfilePageEditSection/ProfilePageEditSection";
 import ProfilePagePasswordReset from "../../components/ProfilePage/ProfilePagePasswordReset/ProfilePagePasswordResetPage";
 import { getUserData } from "../../utilities";
+import { useLocalStorage } from "@mantine/hooks";
 
 const ProfilePage = () => {
   const { colorScheme } = useMantineColorScheme();
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const auth = getAuth();
   const router = useRouter();
+  const [_, setUserData] = useLocalStorage({ key: "user-data" });
   const [user, setUser] = useState({
     firstName: " ",
     lastName: " ",
@@ -31,14 +33,14 @@ const ProfilePage = () => {
     address: "",
     phone: "",
   });
-
+  const getUser = async () => {
+    const userData = await getUserData();
+    setUserData(userData);
+    setUser(userData);
+  };
   useEffect(() => {
-    const getUser = async () => {
-      const userData = await getUserData();
-      setUser(userData);
-    };
     getUser();
-  });
+  }, []);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -66,10 +68,10 @@ const ProfilePage = () => {
         >
           <div className={`${colorScheme === "dark" ? "dark" : ""}`}>
             <div className="m:w-4/5 md:w-2/3 lg:w-3/4 xl:w-11/12 my-0 mx-auto h-full grid xl:grid-cols-2 lg:gird-cols-1 lg:grid-rows-8 xl:grid-rows-3 2xl:grid-cols-3 gap-3">
-              <ProfilePageMainProfile user={user} />
-              <ProfilePageSocial user={user} />
-              <ProfilePageEditSocial user={user} />
-              <ProfilePageEditSection user={user} />
+              <ProfilePageMainProfile user={user} getUser={getUser} />
+              <ProfilePageSocial user={user} getUser={getUser} />
+              <ProfilePageEditSocial user={user} getUser={getUser} />
+              <ProfilePageEditSection user={user} getUser={getUser} />
               <ProfilePagePasswordReset />
             </div>
           </div>
