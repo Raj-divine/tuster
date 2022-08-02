@@ -5,12 +5,14 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 const ProfilePageEditSocial = ({ user, getUser }) => {
   const [_, setUser] = useLocalStorage({ key: "user-data" });
+
   const [socials, setSocials] = useState({
     instagram: "",
     twitter: "",
     linkedin: "",
     facebook: "",
   });
+
   useEffect(() => {
     setSocials({
       instagram: user.socials.instagram || "",
@@ -18,7 +20,8 @@ const ProfilePageEditSocial = ({ user, getUser }) => {
       linkedin: user.socials.linkedin || "",
       facebook: user.socials.facebook || "",
     });
-  }, []);
+  }, [user]);
+
   const submitHandler = async (e) => {
     e.preventDefault();
     const userRef = doc(db, "users", user.uid);
